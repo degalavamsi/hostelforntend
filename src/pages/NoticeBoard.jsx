@@ -24,7 +24,7 @@ const NoticeBoard = () => {
 
     const fetchNotices = async () => {
         try {
-            const res = await api.get('/notices/');
+            const res = await api.get('/notices');
             setNotices(res.data);
         } catch (err) { console.error(err); }
         finally { setNoticeLoading(false); }
@@ -50,7 +50,7 @@ const NoticeBoard = () => {
             if (editNotice) {
                 await api.put(`/notices/${editNotice._id}`, noticeForm);
             } else {
-                await api.post('/notices/', noticeForm);
+                await api.post('/notices', noticeForm);
             }
             fetchNotices();
             setShowAdd(false);

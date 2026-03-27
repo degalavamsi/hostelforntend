@@ -22,7 +22,7 @@ const Navbar = () => {
     const fetchNotifications = async () => {
         try {
             const fetchList = [
-                api.get('/notifications/'),
+                api.get('/notifications'),
                 api.get('/notifications/unread-count')
             ];
             if (isAdmin) fetchList.push(api.get('/notifications/responses'));

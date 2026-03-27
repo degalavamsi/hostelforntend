@@ -29,7 +29,7 @@ const RoomManagement = () => {
 
     const fetchRooms = async () => {
         try {
-            const res = await api.get('/rooms/');
+            const res = await api.get('/rooms');
             setRooms(res.data);
         } catch (err) {
             console.error(err);
@@ -45,7 +45,7 @@ const RoomManagement = () => {
     const handleAddRoom = async (e) => {
         e.preventDefault();
         try {
-            await api.post('/rooms/', {
+            await api.post('/rooms', {
                 ...newRoom,
                 room_number: newRoom.number,
                 room_type: newRoom.type

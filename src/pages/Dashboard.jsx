@@ -65,7 +65,7 @@ const Dashboard = () => {
                     api.get('/students/search?status=approved'),
                     api.get('/payments/dues'),
                     api.get('/visitors/all'),
-                    api.get('/notices/'),
+                    api.get('/notices'),
                     api.get('/notices/complaints/all'),
                     api.get('/facilities/all')
                 ]);
@@ -84,9 +84,9 @@ const Dashboard = () => {
             } else {
                 const results = await Promise.allSettled([
                     api.get('/auth/profile'),
-                    api.get('/notifications/'),
+                    api.get('/notifications'),
                     api.get('/payments/history'),
-                    api.get('/notices/'),
+                    api.get('/notices'),
                     api.get('/notices/complaints/mine'),
                     api.get('/notices/menu'),
                     api.get('/facilities/all'),

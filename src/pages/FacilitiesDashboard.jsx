@@ -22,7 +22,7 @@ const FacilitiesDashboard = () => {
                 api.get('/utilities/wifi'),
                 api.get('/utilities/washing'),
                 api.get('/utilities/water'),
-                api.get('/notices/')
+                api.get('/notices')
             ]);
 
             const [profileRes, wifiRes, washingRes, waterRes, noticesRes] = results.map(r => r.status === 'fulfilled' ? r.value : { data: null });

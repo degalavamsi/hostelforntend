@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children, roles }) => {
 
     if (loading) return null;
     if (!user) return <Navigate to="/login" />;
-    if (roles && !roles.some(role => user.roles.includes(role))) {
+    if (roles && !roles.some(role => user.roles?.includes(role))) {
         return <Navigate to="/" />;
     }
 
@@ -57,7 +57,11 @@ const AppContent = () => {
                     } />
                     <Route path="/visitors" element={<VisitorLog />} />
                 </Route>
+                
+                {/* Catch-all route */}
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+
             {user && <Chatbot key={user.id} />}
         </>
     );
