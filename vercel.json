@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://hostelbackend.vercel.app/:path*"
+      "destination": "https://hostelbackend.vercel.app/api/:path*"
     },
     {
       "source": "/(.*)",
