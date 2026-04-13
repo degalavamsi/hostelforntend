@@ -80,19 +80,19 @@ const RegisterRequest = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary-900/10 via-slate-950 to-slate-950 relative overflow-hidden">
+        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-2 md:p-4 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary-900/10 via-slate-950 to-slate-950 relative overflow-hidden">
              {/* Decorative Elements */}
              <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/5 blur-[120px] rounded-full animate-pulse-slow" />
              <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-primary-600/5 blur-[100px] rounded-full animate-float" />
 
-            <div className="glass-morphism p-10 md:p-16 rounded-[48px] max-w-3xl w-full shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] relative z-10">
-                <div className="mb-12 space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 border border-primary-500/20 rounded-full">
+            <div className="glass-morphism p-6 md:p-16 rounded-3xl md:rounded-[48px] max-w-3xl w-full shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] relative z-10">
+                <div className="mb-6 md:mb-12 space-y-2 md:space-y-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 border border-primary-500/20 rounded-full scale-90 md:scale-100 origin-left">
                         <ShieldCheck className="w-3.5 h-3.5 text-primary-400" />
                         <span className="text-[10px] font-black text-primary-400 uppercase tracking-[0.2em]">Secure Registration</span>
                     </div>
-                    <h1 className="text-5xl font-black text-white tracking-tighter">Initialize <span className="text-primary-500">Access</span></h1>
-                    <p className="text-slate-500 font-bold uppercase text-[11px] tracking-[0.15em]">Enter the Hostel Pro Ecosystem</p>
+                    <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter">Initialize <span className="text-primary-500">Access</span></h1>
+                    <p className="text-slate-500 font-bold uppercase text-[8px] md:text-[11px] tracking-[0.15em]">Enter the Hostel Pro Ecosystem</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">

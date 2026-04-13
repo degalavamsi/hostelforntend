@@ -49,7 +49,7 @@ export default function Login() {
             <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-600/10 blur-[150px] rounded-full animate-pulse-slow" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-indigo-600/10 blur-[120px] rounded-full animate-float" />
 
-            <div className="flex w-full max-w-[1200px] min-h-[750px] rounded-[48px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border border-white/10 backdrop-blur-3xl bg-white/5 relative z-10">
+            <div className="flex w-full max-w-[1200px] min-h-[750px] rounded-3xl md:rounded-[48px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border border-white/10 backdrop-blur-3xl bg-white/5 relative z-10">
 
                 {/* LEFT SECTION: BRANDING & FEATURES */}
                 <div className="hidden lg:flex w-[45%] relative bg-slate-950 items-center justify-center p-12 overflow-hidden border-r border-white/5">
@@ -111,7 +111,7 @@ export default function Login() {
                 </div>
 
                 {/* RIGHT SECTION: LOGIN FORM */}
-                <div className="w-full lg:w-[55%] bg-slate-950 p-10 md:p-20 flex flex-col justify-center relative">
+                <div className="w-full lg:w-[55%] bg-slate-950 p-6 md:p-20 flex flex-col justify-center relative">
                     <div className="max-w-md mx-auto w-full space-y-10">
                         <div className="space-y-4">
                             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 border border-primary-500/20 rounded-full">

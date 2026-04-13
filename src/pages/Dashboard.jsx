@@ -133,24 +133,24 @@ export default function Dashboard() {
         <div className="relative">
             {/* Complaint Modal */}
             {isComplaintModalOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/80 backdrop-blur-md">
-                    <div className="bg-slate-900 border border-white/10 w-full max-w-xl rounded-[48px] p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-500 relative">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-6 bg-slate-950/80 backdrop-blur-md">
+                    <div className="bg-slate-900 border border-white/10 w-full max-w-xl rounded-3xl md:rounded-[48px] p-6 md:p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-500 relative max-h-[95vh] overflow-y-auto custom-scrollbar">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/10 blur-[60px]" />
-                        <div className="flex justify-between items-center mb-10 relative z-10">
+                        <div className="flex justify-between items-center mb-6 md:mb-10 relative z-10">
                             <div>
-                                <h3 className="text-3xl font-black text-white tracking-tighter">Submit Feedback</h3>
-                                <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Direct to Warden Channel</p>
+                                <h3 className="text-xl md:text-3xl font-black text-white tracking-tighter">Submit Feedback</h3>
+                                <p className="text-slate-500 text-[8px] md:text-[10px] font-black uppercase tracking-widest mt-1">Direct to Warden Channel</p>
                             </div>
-                            <button onClick={() => setIsComplaintModalOpen(false)} className="p-3 text-slate-400 hover:text-white bg-white/5 rounded-2xl transition-all"><X className="w-6 h-6" /></button>
+                            <button onClick={() => setIsComplaintModalOpen(false)} className="p-2 md:p-3 text-slate-400 hover:text-white bg-white/5 rounded-xl md:rounded-2xl transition-all"><X className="w-5 h-5 md:w-6 md:h-6" /></button>
                         </div>
                         
-                        <form onSubmit={handlePostComplaint} className="space-y-8 relative z-10">
-                            <div className="space-y-4">
+                        <form onSubmit={handlePostComplaint} className="space-y-6 md:space-y-8 relative z-10">
+                            <div className="space-y-4 md:space-y-6">
                                 <div className="space-y-2 group">
                                     <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 group-focus-within:text-primary-500 transition-colors">Subject</label>
                                     <input
                                         required
-                                        className="w-full bg-slate-800/50 border border-white/5 rounded-2xl p-5 text-white placeholder:text-slate-600 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all font-bold"
+                                        className="w-full bg-slate-800/50 border border-white/5 rounded-xl md:rounded-2xl p-4 md:p-5 text-white placeholder:text-slate-600 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all font-bold text-sm"
                                         placeholder="Identification of issue"
                                         value={complaintForm.title}
                                         onChange={(e) => setComplaintForm({ ...complaintForm, title: e.target.value })}
@@ -160,7 +160,7 @@ export default function Dashboard() {
                                 <div className="space-y-2 group">
                                     <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 group-focus-within:text-primary-500 transition-colors">Infrastructure Node</label>
                                     <select
-                                        className="w-full bg-slate-800/50 border border-white/5 rounded-2xl p-5 text-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all font-bold appearance-none"
+                                        className="w-full bg-slate-800/50 border border-white/5 rounded-xl md:rounded-2xl p-4 md:p-5 text-white focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all font-bold appearance-none text-sm"
                                         value={complaintForm.category}
                                         onChange={(e) => setComplaintForm({ ...complaintForm, category: e.target.value })}
                                     >
@@ -177,7 +177,7 @@ export default function Dashboard() {
                                     <textarea
                                         required
                                         rows="4"
-                                        className="w-full bg-slate-800/50 border border-white/5 rounded-2xl p-5 text-white placeholder:text-slate-600 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all resize-none font-bold"
+                                        className="w-full bg-slate-800/50 border border-white/5 rounded-xl md:rounded-2xl p-4 md:p-5 text-white placeholder:text-slate-600 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all resize-none font-bold text-sm"
                                         placeholder="Provide comprehensive details..."
                                         value={complaintForm.content}
                                         onChange={(e) => setComplaintForm({ ...complaintForm, content: e.target.value })}
@@ -188,7 +188,7 @@ export default function Dashboard() {
                             <button
                                 type="submit"
                                 disabled={submittingComplaint}
-                                className="w-full bg-primary-600 hover:bg-primary-500 text-white font-black py-6 rounded-[32px] shadow-2xl shadow-primary-900/40 transition-all flex items-center justify-center gap-3 text-lg"
+                                className="w-full bg-primary-600 hover:bg-primary-500 text-white font-black py-4 md:py-6 rounded-2xl md:rounded-[32px] shadow-2xl shadow-primary-900/40 transition-all flex items-center justify-center gap-3 text-base md:text-lg"
                             >
                                 {submittingComplaint ? <Loader2 className="w-6 h-6 animate-spin" /> : 'Raise Resolution Ticket'}
                             </button>

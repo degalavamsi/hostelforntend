@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/useAuth';
-import { User, Bell, Search, Clock, CreditCard, X, Trash2, MessageSquareReply, QrCode, Smartphone, ChevronRight, Send, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { User, Bell, Search, Clock, CreditCard, X, Trash2, MessageSquareReply, QrCode, Smartphone, ChevronRight, Send, MessageSquare, CheckCircle2, Menu } from 'lucide-react';
 import api from '../services/api';
 
-const Navbar = () => {
+const Navbar = ({ onMenuClick }) => {
     const { user } = useAuth();
     const isAdmin = user?.roles?.includes('admin') || user?.roles?.includes('manager');
 
@@ -95,23 +95,32 @@ const Navbar = () => {
     };
 
     return (
-        <header className="h-20 bg-slate-950/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-8 sticky top-0 z-50">
-            <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl w-96 transition-all focus-within:border-primary-500/50 shadow-inner shadow-black/40">
-                <Search className="w-5 h-5 text-slate-500" />
-                <input
-                    type="text"
-                    placeholder="Search for anything..."
-                    className="bg-transparent border-none focus:ring-0 text-slate-200 w-full placeholder:text-slate-600 font-medium text-sm"
-                />
+        <header className="h-20 bg-slate-950/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-4 md:px-8 sticky top-0 z-50">
+            <div className="flex items-center gap-4">
+                <button 
+                    onClick={onMenuClick}
+                    className="p-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-400 hover:text-white lg:hidden transition-all active:scale-95"
+                >
+                    <Menu className="w-5 h-5" />
+                </button>
+                
+                <div className="hidden md:flex items-center gap-4 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl w-64 xl:w-96 transition-all focus-within:border-primary-500/50 shadow-inner shadow-black/40">
+                    <Search className="w-5 h-5 text-slate-500" />
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className="bg-transparent border-none focus:ring-0 text-slate-200 w-full placeholder:text-slate-600 font-medium text-sm"
+                    />
+                </div>
             </div>
 
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3 md:gap-6">
                 <div className="relative">
                     <button
                         onClick={() => { setShowNotifications(!showNotifications); setDetailNotif(null); }}
-                        className={`p-3 rounded-2xl transition-all relative ${showNotifications ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/20' : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'}`}
+                        className={`p-2.5 md:p-3 rounded-2xl transition-all relative ${showNotifications ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/20' : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'}`}
                     >
-                        <Bell className="w-6 h-6" />
+                        <Bell className="w-5 h-5 md:w-6 md:h-6" />
                         {unreadCount > 0 && (
                             <span className="absolute top-2 right-2 w-5 h-5 bg-red-500 border-2 border-slate-950 rounded-full text-[10px] font-black flex items-center justify-center animate-pulse">
                                 {unreadCount}
@@ -343,14 +352,14 @@ const Navbar = () => {
                     )}
                 </div>
 
-                <div className="flex items-center gap-5 pl-8 border-l border-white/10">
+                <div className="flex items-center gap-3 md:gap-5 pl-4 md:pl-8 border-l border-white/10">
                     <div className="text-right hidden sm:block">
                         <p className="text-sm font-black text-white leading-none mb-1">{user?.username}</p>
                         <p className="text-[9px] text-primary-500 uppercase font-black tracking-widest">{user?.roles?.[0]}</p>
                     </div>
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl flex items-center justify-center border border-white/10 shadow-lg shadow-primary-900/10 relative group cursor-pointer hover:scale-110 active:scale-95 transition-all">
-                        <User className="text-white w-6 h-6" />
-                        <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl md:rounded-2xl flex items-center justify-center border border-white/10 shadow-lg shadow-primary-900/10 relative group cursor-pointer hover:scale-110 active:scale-95 transition-all">
+                        <User className="text-white w-5 h-5 md:w-6 md:h-6" />
+                        <div className="absolute inset-0 bg-white/20 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                 </div>
             </div>

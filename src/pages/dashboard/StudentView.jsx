@@ -27,8 +27,8 @@ const StudentView = ({
                     <h1 className="text-3xl font-black text-white tracking-tighter">
                         My <span className="text-primary-500">Workspace</span>
                     </h1>
-                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         Session Active: {user?.username}
                     </p>
                 </div>
@@ -36,7 +36,7 @@ const StudentView = ({
                     variant="primary" 
                     icon={MessageSquarePlus} 
                     onClick={onOpenComplaint}
-                    className="shadow-primary-600/20"
+                    className="shadow-primary-600/20 w-full md:w-auto"
                 >
                     Post Feedback
                 </Button>
@@ -46,12 +46,12 @@ const StudentView = ({
                 {/* Main Content Area */}
                 <div className="lg:col-span-8 space-y-8">
                     {/* Profile Card */}
-                    <div className="premium-gradient glass-card p-8 rounded-[40px] relative overflow-hidden group">
+                    <div className="premium-gradient glass-card p-6 md:p-8 rounded-3xl md:rounded-[40px] relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/10 blur-[120px] group-hover:bg-primary-600/15 transition-all duration-1000" />
                         
-                        <div className="flex flex-col md:flex-row gap-10 items-center relative z-10">
+                        <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-center relative z-10">
                             <div className="relative">
-                                <div className="w-32 h-32 rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl relative group-hover:scale-105 transition-transform duration-500">
+                                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl md:rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl relative group-hover:scale-105 transition-transform duration-500">
                                     {profile?.photo_path ? (
                                         <img
                                             src={`${import.meta.env.VITE_API_URL}/uploads/documents/${profile.photo_path}`}
@@ -64,25 +64,22 @@ const StudentView = ({
                                         </div>
                                     )}
                                 </div>
-                                <div className="absolute -bottom-2 -right-2 p-2 bg-emerald-500 rounded-xl shadow-lg border-4 border-slate-950">
-                                    <ShieldCheck className="w-5 h-5 text-white" />
+                                <div className="absolute -bottom-1 -right-1 p-1.5 bg-emerald-500 rounded-lg shadow-lg border-2 border-slate-950 md:border-4 md:rounded-xl md:-bottom-2 md:-right-2 md:p-2">
+                                    <ShieldCheck className="w-4 h-4 md:w-5 md:h-5 text-white" />
                                 </div>
                             </div>
 
-                            <div className="flex-1 space-y-6 text-center md:text-left">
+                            <div className="flex-1 space-y-6 text-center md:text-left w-full">
                                 <div className="space-y-1">
-                                    <h2 className="text-4xl font-black text-white tracking-tighter">{profile?.username || user?.username}</h2>
-                                    <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                                         <p className="text-primary-400 font-black tracking-widest uppercase text-[10px] bg-primary-500/10 px-3 py-1 rounded-full border border-primary-500/20">
-                                            {profile?.email || 'identity@university.com'}
-                                         </p>
-                                         <p className="text-slate-500 font-black tracking-widest uppercase text-[10px] bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                                            Student Member
+                                    <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter truncate max-w-full">{profile?.username || user?.username}</h2>
+                                    <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4">
+                                         <p className="text-primary-400 font-black tracking-widest uppercase text-[9px] bg-primary-500/10 px-3 py-1 rounded-full border border-primary-500/20 truncate">
+                                            {profile?.email || 'N/A'}
                                          </p>
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-2">
                                     {[
                                         { label: 'Block', val: profile?.block || '—' },
                                         { label: 'Floor', val: profile?.floor || '—' },

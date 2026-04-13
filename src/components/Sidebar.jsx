@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Users, DoorOpen, CreditCard, Bell, Utensils, ShieldCheck, LogOut, User as UserIcon, Zap, Settings2, UserCheck } from 'lucide-react';
 import { useAuth } from '../context/useAuth';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
     const { user, logout } = useAuth();
 
     const menuItems = [
@@ -24,20 +24,34 @@ const Sidebar = () => {
     );
 
     return (
-        <aside className="w-72 bg-slate-950 border-r border-white/5 flex flex-col h-screen sticky top-0 z-40 overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-primary-700" />
-            
-            <div className="p-8 flex items-center gap-4">
-                <div className="p-2.5 bg-primary-600 rounded-2xl shadow-lg shadow-primary-900/20">
-                    <ShieldCheck className="w-7 h-7 text-white" />
+        <>
+            {/* Mobile Overlay */}
+            {isOpen && (
+                <div 
+                    className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] lg:hidden"
+                    onClick={onClose}
+                />
+            )}
+
+            <aside className={`
+                fixed lg:sticky top-0 left-0 h-screen w-72 bg-slate-950 border-r border-white/5 flex flex-col z-[101] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+            `}>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-primary-700" />
+                
+                <div className="p-8 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <div className="p-2.5 bg-primary-600 rounded-2xl shadow-lg shadow-primary-900/20">
+                            <ShieldCheck className="w-7 h-7 text-white" />
+                        </div>
+                        <div>
+                           <h1 className="text-2xl font-black text-white tracking-tighter leading-none">
+                              Hostel<span className="text-primary-500">Pro</span>
+                           </h1>
+                           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Version 2.0</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                   <h1 className="text-2xl font-black text-white tracking-tighter leading-none">
-                      Hostel<span className="text-primary-500">Pro</span>
-                   </h1>
-                   <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Version 2.0</p>
-                </div>
-            </div>
 
             <nav className="flex-1 px-4 space-y-1 py-8 overflow-y-auto custom-scrollbar">
                 {filteredItems.map((item) => (
@@ -67,6 +81,7 @@ const Sidebar = () => {
                 </button>
             </div>
         </aside>
+        </>
     );
 };
 
