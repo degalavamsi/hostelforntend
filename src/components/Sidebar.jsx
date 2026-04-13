@@ -24,44 +24,49 @@ const Sidebar = () => {
     );
 
     return (
-        <div className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col h-screen sticky top-0">
-            <div className="p-6 flex items-center gap-3">
-                <div className="p-2 bg-primary-600 rounded-lg">
-                    <ShieldCheck className="w-6 h-6 text-white" />
+        <aside className="w-72 bg-slate-950 border-r border-white/5 flex flex-col h-screen sticky top-0 z-40 overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-primary-700" />
+            
+            <div className="p-8 flex items-center gap-4">
+                <div className="p-2.5 bg-primary-600 rounded-2xl shadow-lg shadow-primary-900/20">
+                    <ShieldCheck className="w-7 h-7 text-white" />
                 </div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-                    Hostel Pro
-                </h1>
+                <div>
+                   <h1 className="text-2xl font-black text-white tracking-tighter leading-none">
+                      Hostel<span className="text-primary-500">Pro</span>
+                   </h1>
+                   <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Version 2.0</p>
+                </div>
             </div>
 
-            <nav className="flex-1 px-4 space-y-2 py-4">
+            <nav className="flex-1 px-4 space-y-1 py-8 overflow-y-auto custom-scrollbar">
                 {filteredItems.map((item) => (
                     <NavLink
                         key={item.name}
                         to={item.path}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${isActive
-                                ? 'bg-primary-600/10 text-primary-400 border border-primary-600/20'
-                                : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100'
+                            `flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group ${isActive
+                                ? 'bg-primary-600/10 text-primary-400 border border-primary-500/10 shadow-[inner_0_0_20px_rgba(99,102,241,0.05)]'
+                                : 'text-slate-500 hover:bg-white/5 hover:text-slate-200 border border-transparent'
                             }`
                         }
                     >
-                        <item.icon className="w-5 h-5" />
-                        <span className="font-medium">{item.name}</span>
+                        <item.icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 tracking-widest`} />
+                        <span className="font-bold tracking-tight">{item.name}</span>
                     </NavLink>
                 ))}
             </nav>
 
-            <div className="p-4 border-t border-slate-800">
+            <div className="p-6 border-t border-white/5 bg-slate-900/20">
                 <button
                     onClick={logout}
-                    className="flex items-center gap-3 w-full px-4 py-3 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-xl transition-all duration-200 uppercase text-xs font-bold tracking-widest"
+                    className="flex items-center gap-4 w-full px-5 py-4 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-2xl transition-all duration-300 group border border-transparent hover:border-rose-500/20"
                 >
-                    <LogOut className="w-4 h-4" />
-                    <span>Logout</span>
+                    <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                    <span className="font-black uppercase text-[11px] tracking-[0.2em]">Sign Out</span>
                 </button>
             </div>
-        </div>
+        </aside>
     );
 };
 

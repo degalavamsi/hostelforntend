@@ -95,13 +95,13 @@ const Navbar = () => {
     };
 
     return (
-        <header className="h-20 bg-slate-950/50 backdrop-blur-xl border-b border-slate-800 flex items-center justify-between px-8 sticky top-0 z-50">
-            <div className="flex items-center gap-4 bg-slate-900/50 border border-slate-800 px-4 py-2 rounded-2xl w-96 shadow-inner shadow-black/20">
+        <header className="h-20 bg-slate-950/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-8 sticky top-0 z-50">
+            <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl w-96 transition-all focus-within:border-primary-500/50 shadow-inner shadow-black/40">
                 <Search className="w-5 h-5 text-slate-500" />
                 <input
                     type="text"
                     placeholder="Search for anything..."
-                    className="bg-transparent border-none focus:ring-0 text-slate-200 w-full placeholder:text-slate-500"
+                    className="bg-transparent border-none focus:ring-0 text-slate-200 w-full placeholder:text-slate-600 font-medium text-sm"
                 />
             </div>
 
@@ -122,7 +122,7 @@ const Navbar = () => {
                     {showNotifications && (
                         <>
                             <div className="fixed inset-0 z-[49]" onClick={() => { setShowNotifications(false); setDetailNotif(null); }} />
-                            <div className="absolute right-0 mt-4 w-[380px] bg-slate-900 border border-slate-800 rounded-[32px] shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300 z-[50]">
+                            <div className="absolute right-0 mt-6 w-[420px] bg-slate-900 border border-white/10 rounded-[40px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden animate-in fade-in slide-in-from-top-6 duration-300 z-[50]">
 
                                 {/* ──── DETAIL VIEW ──── */}
                                 {detailNotif ? (
@@ -343,12 +343,12 @@ const Navbar = () => {
                     )}
                 </div>
 
-                <div className="flex items-center gap-4 pl-6 border-l border-slate-800">
+                <div className="flex items-center gap-5 pl-8 border-l border-white/10">
                     <div className="text-right hidden sm:block">
-                        <p className="text-sm font-extrabold text-white leading-tight">{user?.username}</p>
-                        <p className="text-[10px] text-slate-500 uppercase font-extrabold tracking-widest">{user?.roles?.[0]}</p>
+                        <p className="text-sm font-black text-white leading-none mb-1">{user?.username}</p>
+                        <p className="text-[9px] text-primary-500 uppercase font-black tracking-widest">{user?.roles?.[0]}</p>
                     </div>
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center border-2 border-primary-400/20 shadow-lg shadow-primary-900/20 relative group cursor-pointer hover:scale-105 transition-transform">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl flex items-center justify-center border border-white/10 shadow-lg shadow-primary-900/10 relative group cursor-pointer hover:scale-110 active:scale-95 transition-all">
                         <User className="text-white w-6 h-6" />
                         <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>

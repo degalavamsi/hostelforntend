@@ -8,18 +8,46 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    50: '#f0f9ff',
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                    300: '#7dd3fc',
-                    400: '#38bdf8',
-                    500: '#0ea5e9',
-                    600: '#0284c7',
-                    700: '#0369a1',
-                    800: '#075985',
-                    900: '#0c4a6e',
+                    50: '#eef2ff',
+                    100: '#e0e7ff',
+                    200: '#c7d2fe',
+                    300: '#a5b4fc',
+                    400: '#818cf8',
+                    500: '#6366f1', // Vibrant Indigo
+                    600: '#4f46e5',
+                    700: '#4338ca',
+                    800: '#3730a3',
+                    900: '#312e81',
                 },
+                slate: {
+                    950: '#020617', // Deeper navy
+                }
             },
+            animation: {
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'float': 'float 6s ease-in-out infinite',
+                'fade-in': 'fade-in 0.5s ease-out',
+                'slide-up': 'slide-up 0.5s ease-out',
+            },
+            keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-20px)' },
+                },
+                'fade-in': {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                'slide-up': {
+                    '0%': { opacity: '0', transform: 'translateY(10px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+            },
+            borderRadius: {
+                '3xl': '1.5rem',
+                '4xl': '2rem',
+                '5xl': '2.5rem',
+            }
         },
     },
     plugins: [],

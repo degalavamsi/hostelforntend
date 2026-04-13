@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  background-color: #020617;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,14 +23,48 @@ h1, h2, h3, h4, .font-display {
 
 body {
   margin: 0;
-  display: flex;
-  place-content: center;
-  min-width: 320px;
   min-height: 100vh;
+  background-color: #020617;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-2xl border border-white/10;
+  }
+  
+  .glass-morphism {
+    @apply bg-slate-900/40 backdrop-blur-3xl border border-white/10 shadow-2xl;
+  }
+
+  .glass-card {
+    @apply bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-3xl shadow-2xl transition-all duration-300;
+  }
+
+  .premium-gradient {
+    @apply bg-gradient-to-br from-primary-500/20 via-primary-600/5 to-transparent;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
 }
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-50;
+    @apply bg-slate-950 text-slate-100;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-950;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-800 rounded-full hover:bg-slate-700 transition-colors;
   }
 }
