@@ -46,6 +46,20 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const loginWithGitHub = async (code) => {
+        try {
+            const response = await api.post('/auth/github-login', { code });
+            const { token, user: userData } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(userData));
+            setUser(userData);
+            return { success: true };
+        } catch (error) {
+            console.error("DEBUG: GitHub Login Error:", error);
+            return { success: false, message: error.response?.data?.msg || `GitHub login failed (${error.message})` };
+        }
+    };
+
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -53,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, loginWithGoogle, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, loginWithGoogle, loginWithGitHub, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

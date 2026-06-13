@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import { Loader2, AlertTriangle, Building2, Eye, EyeOff, Mail, Lock, ShieldCheck, Zap, Globe, Sparkles } from "lucide-react";
+import { Loader2, AlertTriangle, Building2, Eye, EyeOff, Mail, Lock, ShieldCheck, Zap, Globe, Sparkles, Github } from "lucide-react";
 import Button from "../components/ui/Button";
 import loginBg from "../assets/login-bg.png";
 
@@ -24,6 +24,22 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const { login, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.error) {
+            setError(location.state.error);
+            // Clear location state error
+            navigate(location.pathname, { replace: true, state: {} });
+        }
+    }, [location, navigate]);
+
+    const handleGitHubLogin = () => {
+        const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID || "e1d1fd21f347af9b9c5bdf87dd91750312bf26c9";
+        const redirectUri = `${window.location.origin}/github-callback`;
+        const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user:email`;
+        window.location.href = githubUrl;
+    };
 
     useEffect(() => {
         // Load the Google Identity Services script dynamically
@@ -260,8 +276,17 @@ export default function Login() {
                             <span className="relative px-3 bg-slate-950 text-[10px] font-black text-slate-500 uppercase tracking-widest">or</span>
                         </div>
 
-                        <div className="flex justify-center w-full">
-                            <div id="googleSignInButton" className="w-full"></div>
+                        <div className="flex flex-col gap-4 w-full">
+                            <div id="googleSignInButton" className="w-full flex justify-center"></div>
+                            
+                            <button
+                                type="button"
+                                onClick={handleGitHubLogin}
+                                className="w-full py-3 px-6 bg-slate-900 border border-white/10 hover:border-white/20 hover:bg-slate-800 rounded-full font-bold text-white flex items-center justify-center gap-3 transition-all cursor-pointer shadow-lg active:scale-[0.98]"
+                            >
+                                <Github className="w-5 h-5 text-white" />
+                                <span className="text-sm font-semibold tracking-wide">Continue with GitHub</span>
+                            </button>
                         </div>
 
                         <div className="pt-6 border-t border-white/5 space-y-6">

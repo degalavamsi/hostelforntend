@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Chatbot from './components/Chatbot';
 import Login from './pages/Login';
 import RegisterRequest from './pages/RegisterRequest';
+import GitHubCallback from './pages/GitHubCallback';
 import Dashboard from './pages/Dashboard';
 import StudentList from './pages/StudentList';
 import RoomManagement from './pages/RoomManagement';
@@ -36,6 +37,7 @@ const AppContent = () => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register-request" element={<RegisterRequest />} />
+                <Route path="/github-callback" element={<GitHubCallback />} />
 
                 <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
                     <Route path="/" element={<Dashboard />} />
