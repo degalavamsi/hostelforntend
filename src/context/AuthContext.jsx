@@ -32,6 +32,20 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const loginWithGoogle = async (googleToken) => {
+        try {
+            const response = await api.post('/auth/google-login', { token: googleToken });
+            const { token, user: userData } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(userData));
+            setUser(userData);
+            return { success: true };
+        } catch (error) {
+            console.error("DEBUG: Google Login Error:", error);
+            return { success: false, message: error.response?.data?.msg || `Google login failed (${error.message})` };
+        }
+    };
+
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -39,8 +53,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, loading }}>
+        <AuthContext.Provider value={{ user, login, loginWithGoogle, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );
 };
+

@@ -22,8 +22,66 @@ export default function Login() {
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Load the Google Identity Services script dynamically
+        const id = "google-jssdk";
+        if (document.getElementById(id)) {
+            if (window.google) {
+                renderGoogleButton();
+            }
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.id = id;
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        script.onload = () => {
+            renderGoogleButton();
+        };
+    }, []);
+
+    const renderGoogleButton = () => {
+        if (window.google) {
+            window.google.accounts.id.initialize({
+                client_id: "934861811446-gh1jmhn021ttc08ti3cjeavaloeghcal.apps.googleusercontent.com",
+                callback: handleGoogleCredentialResponse,
+            });
+            window.google.accounts.id.renderButton(
+                document.getElementById("googleSignInButton"),
+                { 
+                    theme: "filled_blue", 
+                    size: "large", 
+                    width: 448, // Matches max-w-md width
+                    shape: "pill",
+                }
+            );
+        }
+    };
+
+    const handleGoogleCredentialResponse = async (response) => {
+        setLoading(true);
+        setError("");
+        try {
+            const result = await loginWithGoogle(response.credential);
+            if (result.success) {
+                navigate("/");
+            } else {
+                setError(result.message);
+            }
+        } catch (err) {
+            setError("Google login failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -194,6 +252,17 @@ export default function Login() {
                                 Authenticate Session
                             </Button>
                         </form>
+
+                        <div className="relative my-6 flex items-center justify-center">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-white/10"></div>
+                            </div>
+                            <span className="relative px-3 bg-slate-950 text-[10px] font-black text-slate-500 uppercase tracking-widest">or</span>
+                        </div>
+
+                        <div className="flex justify-center w-full">
+                            <div id="googleSignInButton" className="w-full"></div>
+                        </div>
 
                         <div className="pt-6 border-t border-white/5 space-y-6">
                             <p className="text-center text-slate-500 text-[11px] font-black uppercase tracking-widest">
