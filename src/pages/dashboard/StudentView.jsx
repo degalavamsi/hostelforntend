@@ -106,12 +106,12 @@ const StudentView = ({
                         {todayMenu ? (
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
                                 {[
-                                    { label: 'Morning', val: todayMenu.breakfast, color: 'amber' },
-                                    { label: 'Midday', val: todayMenu.lunch, color: 'blue' },
-                                    { label: 'Twilight', val: todayMenu.dinner, color: 'indigo' }
+                                    { label: 'Morning', val: todayMenu.breakfast, bg: 'bg-amber-500/5', borderHover: 'hover:border-amber-500/30', text: 'text-amber-500' },
+                                    { label: 'Midday', val: todayMenu.lunch, bg: 'bg-blue-500/5', borderHover: 'hover:border-blue-500/30', text: 'text-blue-500' },
+                                    { label: 'Twilight', val: todayMenu.dinner, bg: 'bg-indigo-500/5', borderHover: 'hover:border-indigo-500/30', text: 'text-indigo-500' }
                                 ].map((m, i) => (
-                                    <div key={i} className={`p-6 bg-${m.color}-500/5 rounded-3xl border border-white/5 hover:border-${m.color}-500/30 transition-all group text-center`}>
-                                        <p className={`text-[10px] font-black text-${m.color}-500 uppercase tracking-[0.2em] mb-4`}>{m.label}</p>
+                                    <div key={i} className={`p-6 ${m.bg} rounded-3xl border border-white/5 ${m.borderHover} transition-all group text-center`}>
+                                        <p className={`text-[10px] font-black ${m.text} uppercase tracking-[0.2em] mb-4`}>{m.label}</p>
                                         <p className="text-white font-black text-xl group-hover:scale-110 transition-transform duration-500">{m.val || '—'}</p>
                                     </div>
                                 ))}

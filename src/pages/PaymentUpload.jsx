@@ -113,12 +113,14 @@ const PaymentUpload = () => {
                 const uploadRes = await api.post('/payments/bulk/remind', qrForm, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).catch(() => null);
-                // We skip individual upload error silently — just pass upi_id
+                if (uploadRes && uploadRes.data && uploadRes.data.qr_url) {
+                    qr_url = uploadRes.data.qr_url;
+                }
             }
             const res = await api.post('/payments/generate-monthly-rent', {
                 ...rentParams,
                 upi_id: rentParams.upi_id,
-                qr_url: rentQrUrl
+                qr_url: qr_url
             });
             alert(res.data.msg);
             setShowRentModal(false);
