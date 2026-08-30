@@ -143,7 +143,7 @@ const VisitorLog = () => {
 
             {/* Admin Tabs */}
             {isAdmin && (
-                <div className="flex gap-2 border-b border-border w-full">
+                <div className="flex gap-2 border-b border-border w-full overflow-x-auto custom-scrollbar">
                     {[
                         { key: 'all', label: 'All Visitors', icon: Users },
                         { key: 'pending', label: `Pending Requests ${pendingRequests.length > 0 ? `(${pendingRequests.length})` : ''}`, icon: ShieldAlert }

@@ -149,7 +149,7 @@ const NoticeBoard = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-1.5 bg-app p-1 rounded-xl border border-border w-fit shadow-floating">
+            <div className="flex gap-1.5 bg-app p-1 rounded-xl border border-border w-full md:w-fit overflow-x-auto custom-scrollbar shadow-floating">
                 {[
                     { key: TABS.notices, icon: Bell, label: 'Notices' },
                     { key: TABS.complaints, icon: MessageSquarePlus, label: isAdmin ? 'Complaints' : 'My Complaints' }
