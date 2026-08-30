@@ -5,7 +5,7 @@ import { Loader2, AlertTriangle, Eye, EyeOff, Mail, Lock, ShieldCheck, Zap, Glob
 import loginBg from "../assets/login-bg.png";
 
 export default function Login() {
-    const [email, setEmail] = useState("");
+    const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
@@ -76,7 +76,7 @@ export default function Login() {
         setLoading(true);
         setError("");
         try {
-            const result = await login(email, password);
+            const result = await login(identifier, password);
             if (result.success) navigate("/");
             else setError(result.message);
         } catch (err) {
@@ -176,16 +176,16 @@ export default function Login() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-main">Email</label>
+                            <label className="text-sm font-medium text-main">Email, Username, or Phone</label>
                             <div className="relative">
                                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted" />
                                 <input
-                                    type="email"
+                                    type="text"
                                     required
-                                    placeholder="name@example.com"
+                                    placeholder="Enter your email, username, or phone"
                                     className="input-premium !pl-11"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={identifier}
+                                    onChange={(e) => setIdentifier(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -220,9 +220,9 @@ export default function Login() {
                                 </div>
                                 <span className="text-sm text-muted">Remember me</span>
                             </label>
-                            <a href="#" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                            <Link to="/forgot-password" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                                 Forgot password?
-                            </a>
+                            </Link>
                         </div>
 
                         <button 

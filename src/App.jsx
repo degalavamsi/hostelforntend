@@ -5,6 +5,7 @@ import { useAuth } from './context/useAuth';
 import Layout from './components/Layout';
 import Chatbot from './components/Chatbot';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 import RegisterRequest from './pages/RegisterRequest';
 import GitHubCallback from './pages/GitHubCallback';
 import Dashboard from './pages/Dashboard';
@@ -36,6 +37,7 @@ const AppContent = () => {
         <>
             <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/register-request" element={<RegisterRequest />} />
                 <Route path="/github-callback" element={<GitHubCallback />} />
 
