@@ -114,58 +114,58 @@ const StudentManagement = () => {
 
     return (
         <div className="w-full space-y-6 animate-in fade-in duration-500">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-xl font-extrabold text-white tracking-tight">Student <span className="text-primary-500">Records</span></h1>
-                    <p className="text-slate-500 text-[10px] font-medium tracking-tight">Manage admissions and room allocations.</p>
+                    <h1 className="text-2xl font-semibold text-main tracking-tight">Student <span className="text-primary">Records</span></h1>
+                    <p className="text-muted text-xs font-medium uppercase tracking-wider mt-1">Manage admissions and room allocations.</p>
                 </div>
-                <div className="flex items-center gap-3 bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl w-72 shadow-xl shadow-black/20">
-                    <Search className="w-4 h-4 text-slate-500" />
+                <div className="flex items-center gap-3 bg-app border border-border px-4 py-2.5 rounded-full w-full md:w-72 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                    <Search className="w-4 h-4 text-muted" />
                     <input
                         type="text"
                         placeholder="Search records..."
-                        className="bg-transparent border-none focus:ring-0 text-slate-200 w-full text-xs"
+                        className="bg-transparent border-none focus:ring-0 text-main w-full text-sm outline-none placeholder:text-muted"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 </div>
             </div>
 
-            <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="card-3d rounded-2xl overflow-hidden">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="border-b border-slate-800 bg-white/5">
-                            <th className="px-5 py-4 text-[10px] font-black text-slate-500 uppercase tracking-tight">Student</th>
-                            <th className="px-5 py-4 text-[10px] font-black text-slate-500 uppercase tracking-tight">Room & Deposit</th>
-                            <th className="px-5 py-4 text-[10px] font-black text-slate-500 uppercase tracking-tight">Status</th>
-                            <th className="px-5 py-4 text-[10px] font-black text-slate-500 uppercase tracking-tight text-right">Actions</th>
+                        <tr className="border-b border-border bg-app">
+                            <th className="px-6 py-4 text-xs font-semibold text-muted uppercase tracking-wider">Student</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-muted uppercase tracking-wider">Room & Deposit</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-muted uppercase tracking-wider">Status</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-muted uppercase tracking-wider text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800/50">
+                    <tbody className="divide-y divide-border">
                         {students.map((student) => (
-                            <tr key={student._id} className="hover:bg-white/5 transition-colors group">
-                                <td className="px-5 py-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 bg-primary-600/20 text-primary-400 rounded-lg flex items-center justify-center font-black text-xs border border-primary-500/20">
+                            <tr key={student._id} className="hover:bg-app transition-colors group">
+                                <td className="px-6 py-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold text-sm shrink-0">
                                             {student.username?.[0]?.toUpperCase()}
                                         </div>
                                         <div>
-                                            <p className="text-white font-bold text-sm tracking-tight">{student.username || 'Requested'}</p>
-                                            <p className="text-slate-500 text-[10px] tracking-tight">{student.email}</p>
+                                            <p className="text-main font-semibold text-sm tracking-tight">{student.username || 'Requested'}</p>
+                                            <p className="text-muted text-xs">{student.email}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-5 py-4">
-                                    <div className="space-y-1.5">
-                                        <div className="text-slate-200 font-bold text-xs">
-                                            Room: <span className="text-primary-400">{student.room_number || 'NA'}</span>
+                                <td className="px-6 py-4">
+                                    <div className="space-y-2">
+                                        <div className="text-main font-medium text-sm">
+                                            Room: <span className="text-primary font-semibold">{student.room_number || 'NA'}</span>
                                         </div>
-                                        <div className="flex flex-col gap-1">
-                                            <div className="text-slate-500 text-[8px] font-black uppercase tracking-tight">
+                                        <div className="flex flex-col gap-1.5">
+                                            <div className="text-muted text-xs font-medium uppercase tracking-wider">
                                                 ₹{student.deposit || 0}
                                             </div>
                                             <select
-                                                className="bg-slate-950 border border-slate-800 text-[7px] text-slate-400 rounded-md px-1 py-0.5 outline-none focus:border-primary-500 transition-colors w-fit font-black uppercase tracking-tighter"
+                                                className="card-3d text-xs text-muted rounded-md px-2 py-1 outline-none focus:border-primary transition-colors w-fit font-medium uppercase tracking-wider"
                                                 value={student.deposit_refund_status || 'not_paid'}
                                                 onChange={(e) => handleUpdateDepositStatus(student._id, e.target.value)}
                                             >
@@ -177,34 +177,34 @@ const StudentManagement = () => {
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-5 py-4">
-                                    <div className="flex flex-col gap-1.5">
-                                        <span className={`px-2 py-0.5 rounded-lg text-[8px] font-black tracking-tight inline-flex items-center gap-1.5 border ${student.status === 'approved' ? 'bg-green-500/10 text-green-400 border-green-500/10' :
-                                            student.status === 'pending' ? 'bg-amber-500/10 text-amber-400 border-amber-500/10' :
-                                                'bg-red-500/10 text-red-400 border-red-500/10'
+                                <td className="px-6 py-4">
+                                    <div className="flex flex-col gap-2">
+                                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider inline-flex items-center gap-1.5 w-fit uppercase ${student.status === 'approved' ? 'bg-success/10 text-success' :
+                                            student.status === 'pending' ? 'bg-warning/10 text-warning' :
+                                                'bg-danger/10 text-danger'
                                             }`}>
-                                            <div className={`w-1 h-1 rounded-full ${student.status === 'approved' ? 'bg-green-400' :
-                                                student.status === 'pending' ? 'bg-amber-400' :
-                                                    'bg-red-400'
+                                            <div className={`w-1.5 h-1.5 rounded-full ${student.status === 'approved' ? 'bg-success' :
+                                                student.status === 'pending' ? 'bg-warning' :
+                                                    'bg-danger'
                                                 }`}></div>
-                                            {student.status?.toUpperCase()}
+                                            {student.status?.replace('_', ' ')}
                                         </span>
                                         {dues.some(d => d.student_id === student._id) && (
-                                            <span className="px-2 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-lg text-[7px] font-black uppercase tracking-tight animate-pulse flex items-center gap-1 justify-center w-fit">
+                                            <span className="px-2.5 py-1 bg-danger/10 text-danger rounded-full text-[10px] font-bold uppercase tracking-wider animate-pulse flex items-center justify-center w-fit">
                                                 DUE PENDING
                                             </span>
                                         )}
                                     </div>
                                 </td>
-                                <td className="px-5 py-4 text-right">
-                                    <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <td className="px-6 py-4 text-right">
+                                    <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                         {student.status === 'pending' && (
                                             <button
                                                 onClick={() => handleApprove(student._id)}
-                                                className="p-1.5 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white rounded-lg transition-all"
+                                                className="p-2 text-success hover:bg-success/10 rounded-xl transition-all"
                                                 title="Approve"
                                             >
-                                                <UserCheck className="w-3.5 h-3.5" />
+                                                <UserCheck className="w-4 h-4" />
                                             </button>
                                         )}
                                         {student.status === 'approved' && (
@@ -219,32 +219,32 @@ const StudentManagement = () => {
                                                         join_date: student.join_date?.split('T')[0] || new Date().toISOString().split('T')[0]
                                                     });
                                                 }}
-                                                className="p-1.5 bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg transition-all"
+                                                className="p-2 text-primary hover:bg-primary/10 rounded-xl transition-all"
                                                 title="Allocate"
                                             >
-                                                <Search className="w-3.5 h-3.5" />
+                                                <Search className="w-4 h-4" />
                                             </button>
                                         )}
                                         <button
                                             onClick={() => setViewStudent(student)}
-                                            className="p-1.5 bg-purple-500/10 text-purple-400 hover:bg-purple-500 hover:text-white rounded-lg transition-all"
+                                            className="p-2 text-indigo-500 hover:bg-indigo-500/10 rounded-xl transition-all"
                                             title="View"
                                         >
-                                            <Eye className="w-3.5 h-3.5" />
+                                            <Eye className="w-4 h-4" />
                                         </button>
                                         <button
                                             onClick={() => handleResetPassword(student._id)}
-                                            className="p-1.5 bg-amber-500/10 text-amber-500 hover:bg-amber-500 hover:text-white rounded-lg transition-all"
+                                            className="p-2 text-warning hover:bg-warning/10 rounded-xl transition-all"
                                             title="Reset"
                                         >
-                                            <Lock className="w-3.5 h-3.5" />
+                                            <Lock className="w-4 h-4" />
                                         </button>
                                         <button
                                             onClick={() => handleRemove(student._id)}
-                                            className="p-1.5 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-all"
+                                            className="p-2 text-danger hover:bg-danger/10 rounded-xl transition-all"
                                             title="Delete"
                                         >
-                                            <Trash2 className="w-3.5 h-3.5" />
+                                            <Trash2 className="w-4 h-4" />
                                         </button>
                                     </div>
                                 </td>
@@ -254,91 +254,91 @@ const StudentManagement = () => {
                 </table>
                 {loading && (
                     <div className="p-12 flex flex-col items-center gap-4">
-                        <Loader2 className="w-10 h-10 text-primary-500 animate-spin" />
-                        <p className="text-slate-400 font-medium">Loading student records...</p>
+                        <Loader2 className="w-10 h-10 text-primary animate-spin" />
+                        <p className="text-muted font-medium">Loading student records...</p>
                     </div>
                 )}
                 {!loading && students.length === 0 && (
                     <div className="p-12 text-center">
-                        <Users className="w-16 h-16 text-slate-700 mx-auto mb-4" />
-                        <p className="text-slate-400 text-lg">No students found matching your search.</p>
+                        <Users className="w-16 h-16 text-muted mx-auto mb-4 opacity-30" />
+                        <p className="text-muted text-sm font-medium">No students found matching your search.</p>
                     </div>
                 )}
             </div>
 
             {selectedStudent && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-slate-900 border border-slate-800 rounded-[32px] w-full max-w-md overflow-hidden shadow-2xl">
-                        <div className="p-8 border-b border-slate-800 bg-white/5">
-                            <h2 className="text-2xl font-black text-white">Allocate <span className="text-primary-500">Room</span></h2>
-                            <p className="text-slate-400 text-sm mt-1">Assign room and deposit for {selectedStudent.username}</p>
+                <div className="fixed inset-0 bg-main/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="card-3d rounded-2xl w-full max-w-md overflow-hidden">
+                        <div className="p-6 border-b border-border bg-app">
+                            <h2 className="text-2xl font-semibold text-main tracking-tight">Allocate <span className="text-primary">Room</span></h2>
+                            <p className="text-muted text-xs font-medium uppercase tracking-wider mt-1">Assign room and deposit for {selectedStudent.username}</p>
                         </div>
-                        <form onSubmit={handleAllocateRoom} className="p-8 space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-sm font-black text-slate-400 uppercase tracking-tight">Room Number</label>
+                        <form onSubmit={handleAllocateRoom} className="p-6 space-y-5">
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-medium text-muted uppercase tracking-wider ml-1">Room Number</label>
                                 <input
                                     type="text"
                                     required
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                    className="w-full bg-app border border-border rounded-xl p-3 text-main focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm font-medium"
                                     placeholder="Enter room number (e.g. 101)"
                                     value={allocationData.room_number}
                                     onChange={(e) => setAllocationData({ ...allocationData, room_number: e.target.value })}
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-black text-slate-400 uppercase tracking-tight text-[10px]">Bed #</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-xs font-medium text-muted uppercase tracking-wider ml-1">Bed #</label>
                                     <input
                                         type="text" required
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 transition-all"
+                                        className="w-full bg-app border border-border rounded-xl p-3 text-main focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm font-medium"
                                         placeholder="A1"
                                         value={allocationData.bed_number}
                                         onChange={(e) => setAllocationData({ ...allocationData, bed_number: e.target.value })}
                                     />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-black text-slate-400 uppercase tracking-tight text-[10px]">Rent (₹)</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-xs font-medium text-muted uppercase tracking-wider ml-1">Rent (₹)</label>
                                     <input
                                         type="number" required
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 transition-all"
+                                        className="w-full bg-app border border-border rounded-xl p-3 text-main focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm font-medium"
                                         placeholder="5000"
                                         value={allocationData.rent_amount}
                                         onChange={(e) => setAllocationData({ ...allocationData, rent_amount: e.target.value })}
                                     />
                                 </div>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-black text-slate-400 uppercase tracking-tight">Security Deposit (₹)</label>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-medium text-muted uppercase tracking-wider ml-1">Security Deposit (₹)</label>
                                 <input
                                     type="number"
                                     required
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                    className="w-full bg-app border border-border rounded-xl p-3 text-main focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm font-medium"
                                     placeholder="Enter deposit amount"
                                     value={allocationData.deposit}
                                     onChange={(e) => setAllocationData({ ...allocationData, deposit: e.target.value })}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-black text-slate-400 uppercase tracking-tight">Join Date</label>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-medium text-muted uppercase tracking-wider ml-1">Join Date</label>
                                 <input
                                     type="date"
                                     required
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                                    className="w-full bg-app border border-border rounded-xl p-3 text-main focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm font-medium"
                                     value={allocationData.join_date}
                                     onChange={(e) => setAllocationData({ ...allocationData, join_date: e.target.value })}
                                 />
                             </div>
-                            <div className="flex gap-4 pt-4">
+                            <div className="flex gap-3 pt-2">
                                 <button
                                     type="button"
                                     onClick={() => setSelectedStudent(null)}
-                                    className="flex-1 px-6 py-4 rounded-2xl font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800"
+                                    className="flex-1 px-4 py-2.5 rounded-xl font-medium text-muted hover:text-main bg-app hover:bg-border transition-all"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-6 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-2xl font-bold shadow-lg shadow-primary-900/20 transition-all"
+                                    className="flex-1 px-4 py-2.5 bg-primary hover:opacity-90 text-white rounded-xl font-medium shadow-lg shadow-primary/20 transition-all"
                                 >
                                     Allocate
                                 </button>
@@ -350,22 +350,22 @@ const StudentManagement = () => {
 
             {/* Student Detail Modal */}
             {viewStudent && (
-                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-2xl overflow-hidden shadow-2xl">
-                        <div className="p-8 border-b border-slate-800 bg-white/5 flex items-center justify-between">
+                <div className="fixed inset-0 bg-main/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="card-3d rounded-3xl w-full max-w-2xl overflow-hidden">
+                        <div className="p-8 border-b border-border bg-app flex items-center justify-between">
                             <div>
-                                <h2 className="text-2xl font-black text-white">Student <span className="text-primary-500">Details</span></h2>
-                                <p className="text-slate-500 text-sm mt-1">{viewStudent.email}</p>
+                                <h2 className="text-2xl font-semibold text-main tracking-tight">Student <span className="text-primary">Details</span></h2>
+                                <p className="text-muted text-sm font-medium mt-1">{viewStudent.email}</p>
                             </div>
-                            <button onClick={() => setViewStudent(null)} className="p-2 text-slate-500 hover:text-white hover:bg-slate-800 rounded-xl transition-all">
-                                <X className="w-6 h-6" />
+                            <button onClick={() => setViewStudent(null)} className="p-2 text-muted hover:text-main hover:bg-border rounded-xl transition-all">
+                                <X className="w-5 h-5" />
                             </button>
                         </div>
 
                         <div className="p-8 space-y-8 overflow-y-auto max-h-[70vh]">
                             {/* Profile row */}
                             <div className="flex items-center gap-6">
-                                <div className="w-24 h-24 rounded-[20px] bg-slate-800 overflow-hidden border-2 border-slate-700 shrink-0">
+                                <div className="w-24 h-24 rounded-2xl bg-app overflow-hidden border border-border shrink-0">
                                     {viewStudent.photo_path ? (
                                         <img
                                             src={`${API_URL}/uploads/documents/${viewStudent.photo_path}`}
@@ -373,15 +373,15 @@ const StudentManagement = () => {
                                             className="w-full h-full object-cover"
                                         />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-3xl font-black text-slate-600">
+                                        <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-primary/40 bg-primary/5">
                                             {viewStudent.username?.[0]?.toUpperCase()}
                                         </div>
                                     )}
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-black text-white">{viewStudent.username}</h3>
-                                    <p className="text-slate-500">{viewStudent.phone || 'No phone'}</p>
-                                    <span className={`inline-block mt-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${viewStudent.status === 'approved' ? 'bg-green-500/10 text-green-400' : 'bg-amber-500/10 text-amber-400'}`}>
+                                    <h3 className="text-2xl font-semibold text-main tracking-tight">{viewStudent.username}</h3>
+                                    <p className="text-muted font-medium">{viewStudent.phone || 'No phone'}</p>
+                                    <span className={`inline-block mt-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${viewStudent.status === 'approved' ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'}`}>
                                         {viewStudent.status}
                                     </span>
                                 </div>
@@ -397,59 +397,59 @@ const StudentManagement = () => {
                                     { label: 'Deposit Status', value: viewStudent.deposit_refund_status?.replace('_', ' ') || 'not paid' },
                                     { label: 'Join Date', value: viewStudent.join_date ? new Date(viewStudent.join_date).toLocaleDateString() : 'Not set' },
                                 ].map(({ label, value }) => (
-                                    <div key={label} className="p-4 bg-white/5 rounded-2xl border border-white/5">
-                                        <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">{label}</p>
-                                        <p className="text-white font-bold text-sm">{value}</p>
+                                    <div key={label} className="p-4 bg-app rounded-xl border border-border">
+                                        <p className="text-[10px] font-medium text-muted uppercase tracking-wider mb-1">{label}</p>
+                                        <p className="text-main font-semibold text-sm">{value}</p>
                                     </div>
                                 ))}
                             </div>
 
                             {/* Documents */}
                             <div>
-                                <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-4">Documents</h4>
+                                <h4 className="text-xs font-medium text-muted uppercase tracking-wider mb-4">Documents</h4>
                                 <div className="grid grid-cols-2 gap-4">
-                                    <div className={`p-5 rounded-2xl border ${viewStudent.photo_path ? 'bg-green-500/5 border-green-500/20' : 'bg-slate-800/50 border-slate-700'}`}>
+                                    <div className={`p-5 rounded-xl border ${viewStudent.photo_path ? 'bg-success/5 border-success/20' : 'bg-app border-border'}`}>
                                         <div className="flex items-center gap-2 mb-3">
-                                            <Camera className={`w-4 h-4 ${viewStudent.photo_path ? 'text-green-400' : 'text-slate-500'}`} />
-                                            <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Photo</span>
+                                            <Camera className={`w-4 h-4 ${viewStudent.photo_path ? 'text-success' : 'text-muted'}`} />
+                                            <span className="text-xs font-medium text-muted uppercase tracking-wider">Photo</span>
                                         </div>
                                         {viewStudent.photo_path ? (
                                             <a
                                                 href={`${API_URL}/uploads/documents/${viewStudent.photo_path}`}
                                                 target="_blank" rel="noreferrer"
-                                                className="flex items-center gap-2 text-green-400 text-sm font-bold hover:text-green-300 transition-colors"
+                                                className="flex items-center gap-2 text-success text-sm font-semibold hover:opacity-80 transition-opacity"
                                             >
                                                 <Eye className="w-4 h-4" /> View Photo
                                             </a>
                                         ) : (
-                                            <p className="text-slate-600 text-sm">Not uploaded</p>
+                                            <p className="text-muted text-sm font-medium">Not uploaded</p>
                                         )}
                                     </div>
-                                    <div className={`p-5 rounded-2xl border ${viewStudent.id_proof_path ? 'bg-green-500/5 border-green-500/20' : 'bg-slate-800/50 border-slate-700'}`}>
+                                    <div className={`p-5 rounded-xl border ${viewStudent.id_proof_path ? 'bg-success/5 border-success/20' : 'bg-app border-border'}`}>
                                         <div className="flex items-center gap-2 mb-3">
-                                            <FileText className={`w-4 h-4 ${viewStudent.id_proof_path ? 'text-green-400' : 'text-slate-500'}`} />
-                                            <span className="text-xs font-black text-slate-400 uppercase tracking-widest">ID Proof</span>
+                                            <FileText className={`w-4 h-4 ${viewStudent.id_proof_path ? 'text-success' : 'text-muted'}`} />
+                                            <span className="text-xs font-medium text-muted uppercase tracking-wider">ID Proof</span>
                                         </div>
                                         {viewStudent.id_proof_path ? (
                                             <a
                                                 href={`${API_URL}/uploads/documents/${viewStudent.id_proof_path}`}
                                                 target="_blank" rel="noreferrer"
-                                                className="flex items-center gap-2 text-green-400 text-sm font-bold hover:text-green-300 transition-colors"
+                                                className="flex items-center gap-2 text-success text-sm font-semibold hover:opacity-80 transition-opacity"
                                             >
                                                 <Eye className="w-4 h-4" /> View ID Proof
                                             </a>
                                         ) : (
-                                            <p className="text-slate-600 text-sm">Not uploaded</p>
+                                            <p className="text-muted text-sm font-medium">Not uploaded</p>
                                         )}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-6 border-t border-slate-800 flex justify-end">
+                        <div className="p-6 border-t border-border flex justify-end bg-app">
                             <button
                                 onClick={() => setViewStudent(null)}
-                                className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-2xl transition-all border border-slate-700"
+                                className="px-6 py-2.5 card-3d hover:bg-border text-main font-medium rounded-xl transition-all"
                             >
                                 Close
                             </button>

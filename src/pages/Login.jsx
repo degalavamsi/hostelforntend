@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import { Loader2, AlertTriangle, Building2, Eye, EyeOff, Mail, Lock, ShieldCheck, Zap, Globe, Sparkles, Github } from "lucide-react";
-import Button from "../components/ui/Button";
+import { Loader2, AlertTriangle, Eye, EyeOff, Mail, Lock, ShieldCheck, Zap, Globe, Sparkles, Github, CheckCircle2, ArrowRight } from "lucide-react";
 import loginBg from "../assets/login-bg.png";
-
-const FeatureCard = ({ icon: Icon, title, description, delay }) => (
-    <div className={`p-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl animate-in fade-in slide-in-from-right-10 duration-1000 fill-mode-both`} style={{ animationDelay: `${delay}ms` }}>
-        <div className="w-10 h-10 bg-primary-600/20 text-primary-400 rounded-2xl flex items-center justify-center mb-4">
-            <Icon className="w-5 h-5" />
-        </div>
-        <h3 className="text-white font-black text-sm mb-1">{title}</h3>
-        <p className="text-slate-500 text-[10px] font-bold uppercase tracking-tight leading-relaxed">{description}</p>
-    </div>
-);
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -29,7 +18,6 @@ export default function Login() {
     useEffect(() => {
         if (location.state?.error) {
             setError(location.state.error);
-            // Clear location state error
             navigate(location.pathname, { replace: true, state: {} });
         }
     }, [location, navigate]);
@@ -42,25 +30,18 @@ export default function Login() {
     };
 
     useEffect(() => {
-        // Load the Google Identity Services script dynamically
         const id = "google-jssdk";
         if (document.getElementById(id)) {
-            if (window.google) {
-                renderGoogleButton();
-            }
+            if (window.google) renderGoogleButton();
             return;
         }
-
         const script = document.createElement("script");
         script.id = id;
         script.src = "https://accounts.google.com/gsi/client";
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
-
-        script.onload = () => {
-            renderGoogleButton();
-        };
+        script.onload = () => renderGoogleButton();
     }, []);
 
     const renderGoogleButton = () => {
@@ -71,12 +52,7 @@ export default function Login() {
             });
             window.google.accounts.id.renderButton(
                 document.getElementById("googleSignInButton"),
-                { 
-                    theme: "filled_blue", 
-                    size: "large", 
-                    width: 448, // Matches max-w-md width
-                    shape: "pill",
-                }
+                { theme: "outline", size: "large", width: 400, shape: "pill" }
             );
         }
     };
@@ -86,11 +62,8 @@ export default function Login() {
         setError("");
         try {
             const result = await loginWithGoogle(response.credential);
-            if (result.success) {
-                navigate("/");
-            } else {
-                setError(result.message);
-            }
+            if (result.success) navigate("/");
+            else setError(result.message);
         } catch (err) {
             setError("Google login failed. Please try again.");
         } finally {
@@ -98,18 +71,14 @@ export default function Login() {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError("");
         try {
             const result = await login(email, password);
-            if (result.success) {
-                navigate("/");
-            } else {
-                setError(result.message);
-            }
+            if (result.success) navigate("/");
+            else setError(result.message);
         } catch (err) {
             setError("Connection failed. Please check your network.");
         } finally {
@@ -118,208 +87,195 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-950 selection:bg-primary-500/30 font-sans p-4 relative overflow-hidden">
-            {/* Background Decoration */}
-            <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary-600/10 blur-[150px] rounded-full animate-pulse-slow" />
-            <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-indigo-600/10 blur-[120px] rounded-full animate-float" />
+        <div className="min-h-screen flex bg-white dark:bg-main font-sans">
+            
+            {/* ───── LEFT: Branding Panel ───── */}
+            <div className="hidden lg:flex w-[45%] relative overflow-hidden" style={{background: 'linear-gradient(135deg, #0ea5e9 0%, #3b82f6 40%, #6366f1 100%)'}}>
+                {/* Decorative circles */}
+                <div className="absolute -top-20 -left-20 w-80 h-80 bg-white/10 rounded-full blur-xl" />
+                <div className="absolute bottom-10 right-10 w-60 h-60 bg-white/5 rounded-full blur-2xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/5 rounded-full" />
 
-            <div className="flex w-full max-w-[1200px] min-h-[750px] rounded-3xl md:rounded-[48px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border border-white/10 backdrop-blur-3xl bg-white/5 relative z-10">
-
-                {/* LEFT SECTION: BRANDING & FEATURES */}
-                <div className="hidden lg:flex w-[45%] relative bg-slate-950 items-center justify-center p-12 overflow-hidden border-r border-white/5">
-                    <div className="absolute inset-0 z-0">
-                        <img
-                            src={loginBg}
-                            className="w-full h-full object-cover opacity-40 brightness-75 transition-transform duration-[20000ms] scale-110 hover:scale-100"
-                            alt="Premium Background"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/60 to-transparent"></div>
+                <div className="relative z-10 flex flex-col justify-between p-12 w-full">
+                    {/* Top: Brand */}
+                    <div className="flex items-center gap-3">
+                        <div className="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                            <ShieldCheck className="w-6 h-6 text-white" />
+                        </div>
+                        <h1 className="text-2xl font-bold text-white tracking-tight">
+                            HostelPro
+                        </h1>
                     </div>
 
-                    <div className="relative z-10 w-full space-y-12">
-                        <div className="flex items-center gap-4">
-                            <div className="p-3 bg-primary-600 rounded-[20px] shadow-2xl shadow-primary-900/40">
-                                <ShieldCheck className="w-8 h-8 text-white" />
-                            </div>
-                            <h1 className="text-4xl font-black text-white tracking-tighter">
-                                Hostel<span className="text-primary-500">Pro</span>
-                            </h1>
-                        </div>
-
-                        <div className="space-y-6">
-                            <h2 className="text-5xl font-black text-white leading-tight tracking-tighter">
-                                Precision Living<br />
-                                <span className="text-primary-400">Redefined.</span>
+                    {/* Center: Headline */}
+                    <div className="space-y-8">
+                        <div>
+                            <h2 className="text-5xl font-extrabold text-white leading-[1.1] tracking-tight">
+                                Smart Hostel<br/>
+                                Management<br/>
+                                <span className="text-white/80">Made Simple.</span>
                             </h2>
-                            <p className="text-lg text-slate-400 font-medium max-w-sm leading-relaxed">
-                                Experience the next generation of smart student housing management.
+                            <p className="text-lg text-white/70 mt-6 max-w-md leading-relaxed">
+                                Streamline admissions, payments, and facility management — all in one powerful platform.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4 pt-4">
-                            <FeatureCard 
-                                icon={Zap} 
-                                title="Instant Pulse" 
-                                description="Real-time occupancy and financial analytics at your fingertips."
-                                delay={200}
-                            />
-                            <FeatureCard 
-                                icon={Globe} 
-                                title="Smart Ecosystem" 
-                                description="Centralized control for laundry, utility, and security nodes."
-                                delay={400}
-                            />
-                        </div>
-
-                        <div className="pt-8 flex items-center gap-2">
-                             <div className="flex -space-x-3">
-                                {[1,2,3,4].map(i => (
-                                    <div key={i} className={`w-10 h-10 rounded-full border-2 border-slate-950 bg-slate-800 flex items-center justify-center overflow-hidden`}>
-                                        <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
-                                    </div>
-                                ))}
-                             </div>
-                             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-4">Empowering 1,000+ Students</p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* RIGHT SECTION: LOGIN FORM */}
-                <div className="w-full lg:w-[55%] bg-slate-950 p-6 md:p-20 flex flex-col justify-center relative">
-                    <div className="max-w-md mx-auto w-full space-y-10">
-                        <div className="space-y-4">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-500/10 border border-primary-500/20 rounded-full">
-                                <Sparkles className="w-3.5 h-3.5 text-primary-400" />
-                                <span className="text-[10px] font-black text-primary-400 uppercase tracking-[0.2em]">Secure Access</span>
-                            </div>
-                            <h2 className="text-4xl font-black text-white tracking-tighter">Welcome Back</h2>
-                            <p className="text-slate-500 font-bold uppercase text-[11px] tracking-widest">Identify yourself to continue</p>
-                        </div>
-
-                        {error && (
-                            <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 py-4 px-6 rounded-3xl text-sm font-bold flex items-center gap-4 animate-shake">
-                                <AlertTriangle className="w-5 h-5 shrink-0" />
-                                {error}
-                            </div>
-                        )}
-
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div className="space-y-2 group">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 group-focus-within:text-primary-500 transition-colors">Identification</label>
-                                <div className="relative">
-                                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-primary-500 transition-colors" />
-                                    <input
-                                        type="email"
-                                        required
-                                        placeholder="Email or Username"
-                                        className="w-full bg-white/5 border border-white/10 p-5 pl-14 rounded-3xl text-white placeholder:text-slate-600 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all font-bold"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
+                        {/* Feature pills */}
+                        <div className="flex flex-wrap gap-3">
+                            {[
+                                { icon: Zap, text: 'Real-time Analytics' },
+                                { icon: Globe, text: 'Cloud-based' },
+                                { icon: ShieldCheck, text: 'Secure & Reliable' },
+                            ].map((f, i) => (
+                                <div key={i} className="flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium">
+                                    <f.icon className="w-4 h-4" />
+                                    {f.text}
                                 </div>
-                            </div>
-
-                            <div className="space-y-2 group">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 group-focus-within:text-primary-500 transition-colors">Credential</label>
-                                <div className="relative">
-                                    <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-primary-500 transition-colors" />
-                                    <input
-                                        type={showPassword ? "text" : "password"}
-                                        required
-                                        placeholder="Enter Password"
-                                        className="w-full bg-white/5 border border-white/10 p-5 pl-14 pr-14 rounded-3xl text-white placeholder:text-slate-600 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 outline-none transition-all font-bold"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-5 top-1/2 -translate-y-1/2 p-2 text-slate-500 hover:text-white transition-colors"
-                                    >
-                                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-between items-center px-2">
-                                <label className="flex items-center gap-3 cursor-pointer group">
-                                    <div className="relative w-5 h-5 border-2 border-white/10 rounded-lg group-hover:border-primary-500/50 transition-colors overflow-hidden">
-                                        <input
-                                            type="checkbox"
-                                            className="sr-only"
-                                            checked={rememberMe}
-                                            onChange={() => setRememberMe(!rememberMe)}
-                                        />
-                                        <div className={`absolute inset-0 bg-primary-500 transition-transform ${rememberMe ? 'scale-100' : 'scale-0'}`} />
-                                    </div>
-                                    <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest group-hover:text-slate-300 transition-colors">Remember Me</span>
-                                </label>
-
-                                <a href="#" className="text-[11px] font-black text-primary-500 uppercase tracking-widest hover:text-primary-400 transition-colors underline underline-offset-4 decoration-primary-500/30">
-                                    Reset Access
-                                </a>
-                            </div>
-
-                            <Button 
-                                type="submit" 
-                                loading={loading} 
-                                className="w-full py-5 rounded-[28px] text-lg tracking-tight"
-                            >
-                                Authenticate Session
-                            </Button>
-                        </form>
-
-                        <div className="relative my-6 flex items-center justify-center">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-white/10"></div>
-                            </div>
-                            <span className="relative px-3 bg-slate-950 text-[10px] font-black text-slate-500 uppercase tracking-widest">or</span>
-                        </div>
-
-                        <div className="flex flex-col gap-4 w-full">
-                            <div id="googleSignInButton" className="w-full flex justify-center"></div>
-                            
-                            <button
-                                type="button"
-                                onClick={handleGitHubLogin}
-                                className="w-full py-3 px-6 bg-slate-900 border border-white/10 hover:border-white/20 hover:bg-slate-800 rounded-full font-bold text-white flex items-center justify-center gap-3 transition-all cursor-pointer shadow-lg active:scale-[0.98]"
-                            >
-                                <Github className="w-5 h-5 text-white" />
-                                <span className="text-sm font-semibold tracking-wide">Continue with GitHub</span>
-                            </button>
-                        </div>
-
-                        <div className="pt-6 border-t border-white/5 space-y-6">
-                            <p className="text-center text-slate-500 text-[11px] font-black uppercase tracking-widest">
-                                Global Student Network?{" "}
-                                <Link to="/register-request" className="text-primary-500 hover:text-primary-400 transition-colors">
-                                    Apply For Membership
-                                </Link>
-                            </p>
+                            ))}
                         </div>
                     </div>
 
-                    <div className="mt-20 lg:mt-auto text-center opacity-30">
-                        <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.5em]">
-                            End-to-End Encrypted. Data Sovereign.
+                    {/* Bottom: Social proof */}
+                    <div className="flex items-center gap-4">
+                        <div className="flex -space-x-2.5">
+                            {[1,2,3,4].map(i => (
+                                <div key={i} className="w-9 h-9 rounded-full border-2 border-white/30 overflow-hidden bg-white/20">
+                                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="" className="w-full h-full object-cover" />
+                                </div>
+                            ))}
+                        </div>
+                        <p className="text-white/70 text-sm font-medium">
+                            Trusted by <span className="text-white font-bold">1,000+</span> students
                         </p>
                     </div>
                 </div>
             </div>
+
+            {/* ───── RIGHT: Login Form ───── */}
+            <div className="flex-1 flex items-center justify-center p-6 md:p-12 bg-white dark:bg-surface">
+                <div className="max-w-[420px] w-full space-y-8">
+                    {/* Mobile brand */}
+                    <div className="lg:hidden flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                            <ShieldCheck className="w-5 h-5 text-white" />
+                        </div>
+                        <h1 className="text-xl font-bold text-main">HostelPro</h1>
+                    </div>
+
+                    <div>
+                        <h2 className="text-3xl font-bold text-main tracking-tight">Welcome back</h2>
+                        <p className="text-muted text-sm mt-2">Enter your credentials to access your account</p>
+                    </div>
+
+                    {error && (
+                        <div className="flex items-center gap-3 p-4 bg-danger/5 border border-danger/15 text-danger rounded-xl text-sm animate-shake">
+                            <AlertTriangle className="w-5 h-5 shrink-0" />
+                            {error}
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                        <div className="space-y-1.5">
+                            <label className="text-sm font-medium text-main">Email</label>
+                            <div className="relative">
+                                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted" />
+                                <input
+                                    type="email"
+                                    required
+                                    placeholder="name@example.com"
+                                    className="input-premium !pl-11"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-1.5">
+                            <label className="text-sm font-medium text-main">Password</label>
+                            <div className="relative">
+                                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted" />
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    required
+                                    placeholder="Enter your password"
+                                    className="input-premium !pl-11 !pr-11"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-main transition-colors"
+                                >
+                                    {showPassword ? <EyeOff className="w-[18px] h-[18px]" /> : <Eye className="w-[18px] h-[18px]" />}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-between items-center">
+                            <label className="flex items-center gap-2.5 cursor-pointer group">
+                                <div className={`w-4.5 h-4.5 border rounded-md flex items-center justify-center transition-all ${rememberMe ? 'bg-primary border-primary' : 'border-border group-hover:border-primary/50'}`}>
+                                    <input type="checkbox" className="sr-only" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
+                                    {rememberMe && <CheckCircle2 className="w-3 h-3 text-white" />}
+                                </div>
+                                <span className="text-sm text-muted">Remember me</span>
+                            </label>
+                            <a href="#" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                                Forgot password?
+                            </a>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            disabled={loading}
+                            className="btn-primary w-full !py-3 !text-sm"
+                        >
+                            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+                            Sign In
+                            {!loading && <ArrowRight className="w-4 h-4" />}
+                        </button>
+                    </form>
+
+                    {/* Divider */}
+                    <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-border"></div>
+                        </div>
+                        <span className="relative px-4 bg-white dark:bg-surface text-xs text-muted font-medium">or continue with</span>
+                    </div>
+
+                    {/* Social Login */}
+                    <div className="flex flex-col gap-3">
+                        <div id="googleSignInButton" className="w-full flex justify-center"></div>
+                        
+                        <button
+                            type="button"
+                            onClick={handleGitHubLogin}
+                            className="w-full py-3 px-4 bg-app border border-border hover:border-muted/30 rounded-xl font-medium text-main flex items-center justify-center gap-3 transition-all text-sm hover:shadow-sm"
+                        >
+                            <Github className="w-5 h-5" />
+                            Continue with GitHub
+                        </button>
+                    </div>
+
+                    <p className="text-center text-muted text-sm">
+                        Don't have an account?{" "}
+                        <Link to="/register-request" className="text-primary font-semibold hover:text-primary/80 transition-colors">
+                            Request Access
+                        </Link>
+                    </p>
+                </div>
+            </div>
             
-            <style>
-                {`
-                    @keyframes shake {
-                        0%, 100% { transform: translateX(0); }
-                        25% { transform: translateX(-5px); }
-                        75% { transform: translateX(5px); }
-                    }
-                    .animate-shake {
-                        animation: shake 0.4s ease-in-out;
-                    }
-                    input::-ms-reveal, input::-ms-clear { display: none; }
-                `}
-            </style>
+            <style>{`
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-5px); }
+                    75% { transform: translateX(5px); }
+                }
+                .animate-shake { animation: shake 0.4s ease-in-out; }
+                input::-ms-reveal, input::-ms-clear { display: none; }
+            `}</style>
         </div>
     );
 }

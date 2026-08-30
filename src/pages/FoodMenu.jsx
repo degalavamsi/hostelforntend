@@ -42,9 +42,9 @@ const FoodMenu = () => {
         <div className="w-full space-y-6 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-extrabold text-white tracking-tight">Culinary <span className="text-primary-500">Planner</span>
+                    <h1 className="text-2xl font-semibold text-main tracking-tight">Culinary <span className="text-primary">Planner</span>
                     </h1>
-                    <p className="text-slate-500 text-[10px] font-medium tracking-tight">Daily food schedule and nutrition chart.</p>
+                    <p className="text-muted text-xs font-medium uppercase tracking-wider mt-1">Daily food schedule and nutrition chart.</p>
                 </div>
             </div>
 
@@ -54,82 +54,81 @@ const FoodMenu = () => {
                     const isEditing = editing === day;
 
                     return (
-                        <div key={day} className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden group hover:border-primary-500/50 transition-all duration-300">
-                            <div className="bg-white/5 px-4 py-3 border-b border-white/5 flex items-center justify-between">
-                                <h4 className="text-sm font-black text-white uppercase tracking-tight">{day}</h4>
+                        <div key={day} className="card-3d rounded-3xl overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col">
+                            <div className="bg-app px-5 py-4 border-b border-border flex items-center justify-between">
+                                <h4 className="text-sm font-bold text-main uppercase tracking-wider">{day}</h4>
                                 {isAdmin && !isEditing && (
                                     <button
                                         onClick={() => {
                                             setEditing(day);
                                             setEditForm(dayData);
                                         }}
-                                        className="p-1.5 text-slate-500 hover:text-primary-400 transition-colors"
+                                        className="p-2 text-muted hover:text-primary hover:bg-primary/10 rounded-xl transition-all"
                                     >
                                         <Edit3 className="w-4 h-4" />
                                     </button>
                                 )}
                             </div>
 
-                            <div className="p-5 space-y-5">
+                            <div className="p-5 space-y-5 flex-1">
                                 <div className="space-y-2">
-                                    <div className="flex items-center gap-2 text-amber-500 font-black text-[9px] uppercase tracking-tight">
-                                        <Coffee className="w-3.5 h-3.5" /> Breakfast
+                                    <div className="flex items-center gap-2 text-warning font-bold text-[10px] uppercase tracking-wider">
+                                        <Coffee className="w-4 h-4" /> Breakfast
                                     </div>
                                     {isEditing ? (
                                         <input
-                                            className="w-full bg-slate-800 border-none rounded-lg p-2 text-white text-xs"
+                                            className="w-full bg-app border border-border rounded-xl p-3 text-main text-sm font-medium focus:border-warning focus:ring-2 focus:ring-warning/20 outline-none transition-all"
                                             value={editForm.breakfast}
                                             onChange={(e) => setEditForm({ ...editForm, breakfast: e.target.value })}
                                         />
                                     ) : (
-                                        <p className="text-slate-200 text-sm font-bold tracking-tight">{dayData.breakfast}</p>
+                                        <p className="text-main text-sm font-semibold tracking-tight leading-relaxed">{dayData.breakfast}</p>
                                     )}
                                 </div>
 
                                 <div className="space-y-2">
-                                    <div className="flex items-center gap-2 text-blue-500 font-black text-[9px] uppercase tracking-widest">
-                                        <Sun className="w-3.5 h-3.5" /> Lunch
+                                    <div className="flex items-center gap-2 text-blue-500 font-bold text-[10px] uppercase tracking-wider">
+                                        <Sun className="w-4 h-4" /> Lunch
                                     </div>
                                     {isEditing ? (
                                         <input
-                                            className="w-full bg-slate-800 border-none rounded-lg p-2 text-white text-xs"
+                                            className="w-full bg-app border border-border rounded-xl p-3 text-main text-sm font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
                                             value={editForm.lunch}
                                             onChange={(e) => setEditForm({ ...editForm, lunch: e.target.value })}
                                         />
                                     ) : (
-                                        <p className="text-slate-200 text-sm font-bold tracking-tight">{dayData.lunch}</p>
+                                        <p className="text-main text-sm font-semibold tracking-tight leading-relaxed">{dayData.lunch}</p>
                                     )}
                                 </div>
 
                                 <div className="space-y-2">
-                                    <div className="flex items-center gap-2 text-indigo-500 font-black text-[9px] uppercase tracking-widest">
-                                        <Moon className="w-3.5 h-3.5" /> Dinner
+                                    <div className="flex items-center gap-2 text-indigo-500 font-bold text-[10px] uppercase tracking-wider">
+                                        <Moon className="w-4 h-4" /> Dinner
                                     </div>
                                     {isEditing ? (
                                         <input
-                                            className="w-full bg-slate-800 border-none rounded-lg p-2 text-white text-xs"
+                                            className="w-full bg-app border border-border rounded-xl p-3 text-main text-sm font-medium focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all"
                                             value={editForm.dinner}
                                             onChange={(e) => setEditForm({ ...editForm, dinner: e.target.value })}
                                         />
                                     ) : (
-                                        <p className="text-slate-200 text-sm font-bold tracking-tight">{dayData.dinner}</p>
+                                        <p className="text-main text-sm font-semibold tracking-tight leading-relaxed">{dayData.dinner}</p>
                                     )}
                                 </div>
-
-                                {isEditing && (
-                                    <div className="flex gap-2 pt-3 border-t border-white/5">
-                                        <button onClick={() => setEditing(null)} className="flex-1 py-2 text-slate-500 text-[10px] font-black uppercase tracking-widest hover:text-white transition-colors">Cancel</button>
-                                        <button onClick={() => handleUpdate(day)} className="flex-1 py-2 bg-primary-600 text-white rounded-lg text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5 shadow-lg shadow-primary-900/10">Save</button>
-                                    </div>
-                                )}
                             </div>
+                            {isEditing && (
+                                <div className="flex gap-3 p-5 pt-0 mt-auto border-t border-border/50">
+                                    <button onClick={() => setEditing(null)} className="flex-1 py-2.5 text-muted hover:text-main font-medium border border-border hover:bg-border rounded-xl transition-colors">Cancel</button>
+                                    <button onClick={() => handleUpdate(day)} className="flex-1 py-2.5 bg-primary text-white rounded-xl font-medium shadow-lg shadow-primary/20 hover:opacity-90 transition-all flex items-center justify-center gap-2">Save</button>
+                                </div>
+                            )}
                         </div>
                     );
                 })}
             </div>
             {loading && (
                 <div className="flex items-center justify-center py-10">
-                    <Loader2 className="w-8 h-8 text-primary-500 animate-spin" />
+                    <Loader2 className="w-10 h-10 text-primary animate-spin" />
                 </div>
             )}
         </div>

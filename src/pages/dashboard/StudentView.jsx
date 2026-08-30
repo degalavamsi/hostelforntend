@@ -24,11 +24,11 @@ const StudentView = ({
             {/* Header Section */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="space-y-1">
-                    <h1 className="text-3xl font-black text-white tracking-tighter">
-                        My <span className="text-primary-500">Workspace</span>
+                    <h1 className="text-3xl font-semibold text-main tracking-tight">
+                        My <span className="text-primary">Workspace</span>
                     </h1>
-                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <p className="text-muted text-xs font-medium uppercase tracking-wider flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
                         Session Active: {user?.username}
                     </p>
                 </div>
@@ -46,12 +46,11 @@ const StudentView = ({
                 {/* Main Content Area */}
                 <div className="lg:col-span-8 space-y-8">
                     {/* Profile Card */}
-                    <div className="premium-gradient glass-card p-6 md:p-8 rounded-3xl md:rounded-[40px] relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/10 blur-[120px] group-hover:bg-primary-600/15 transition-all duration-1000" />
+                    <div className="card-3d p-6 md:p-8 rounded-2xl relative overflow-hidden group">
                         
                         <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-center relative z-10">
                             <div className="relative">
-                                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl md:rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl relative group-hover:scale-105 transition-transform duration-500">
+                                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-surface shadow-md relative group-hover:scale-105 transition-transform duration-500">
                                     {profile?.photo_path ? (
                                         <img
                                             src={`${import.meta.env.VITE_API_URL}/uploads/documents/${profile.photo_path}`}
@@ -59,36 +58,36 @@ const StudentView = ({
                                             className="w-full h-full object-cover"
                                         />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-5xl font-black text-slate-700 bg-slate-900">
+                                        <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-primary bg-primary/10">
                                             {user?.username?.[0]?.toUpperCase()}
                                         </div>
                                     )}
                                 </div>
-                                <div className="absolute -bottom-1 -right-1 p-1.5 bg-emerald-500 rounded-lg shadow-lg border-2 border-slate-950 md:border-4 md:rounded-xl md:-bottom-2 md:-right-2 md:p-2">
+                                <div className="absolute bottom-0 right-0 p-1.5 bg-success rounded-full shadow-lg border-2 border-surface">
                                     <ShieldCheck className="w-4 h-4 md:w-5 md:h-5 text-white" />
                                 </div>
                             </div>
 
                             <div className="flex-1 space-y-6 text-center md:text-left w-full">
                                 <div className="space-y-1">
-                                    <h2 className="text-3xl md:text-4xl font-black text-white tracking-tighter truncate max-w-full">{profile?.username || user?.username}</h2>
-                                    <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4">
-                                         <p className="text-primary-400 font-black tracking-widest uppercase text-[9px] bg-primary-500/10 px-3 py-1 rounded-full border border-primary-500/20 truncate">
+                                    <h2 className="text-3xl md:text-4xl font-bold text-main tracking-tight truncate max-w-full">{profile?.username || user?.username}</h2>
+                                    <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4 mt-2">
+                                         <p className="text-primary font-medium tracking-wider uppercase text-xs bg-primary/10 px-3 py-1 rounded-full border border-primary/20 truncate">
                                             {profile?.email || 'N/A'}
                                          </p>
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-2">
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-4">
                                     {[
                                         { label: 'Block', val: profile?.block || '—' },
                                         { label: 'Floor', val: profile?.floor || '—' },
                                         { label: 'Room', val: `${profile?.room_number || '—'}-${profile?.bed_number || '—'}` },
-                                        { label: 'Rent', val: `₹${profile?.rent_amount || 0}`, color: 'text-emerald-400' }
+                                        { label: 'Rent', val: `₹${profile?.rent_amount || 0}`, color: 'text-success' }
                                     ].map((item, i) => (
-                                        <div key={i} className="p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-all text-center">
-                                            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">{item.label}</p>
-                                            <p className={`text-sm font-black ${item.color || 'text-white'}`}>{item.val}</p>
+                                        <div key={i} className="p-4 bg-app rounded-xl border border-border text-center transition-all">
+                                            <p className="text-xs font-medium text-muted uppercase tracking-wider mb-1">{item.label}</p>
+                                            <p className={`text-base font-semibold ${item.color || 'text-main'}`}>{item.val}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -104,15 +103,15 @@ const StudentView = ({
                         className="rounded-[40px]"
                     >
                         {todayMenu ? (
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                                 {[
-                                    { label: 'Morning', val: todayMenu.breakfast, bg: 'bg-amber-500/5', borderHover: 'hover:border-amber-500/30', text: 'text-amber-500' },
-                                    { label: 'Midday', val: todayMenu.lunch, bg: 'bg-blue-500/5', borderHover: 'hover:border-blue-500/30', text: 'text-blue-500' },
-                                    { label: 'Twilight', val: todayMenu.dinner, bg: 'bg-indigo-500/5', borderHover: 'hover:border-indigo-500/30', text: 'text-indigo-500' }
+                                    { label: 'Morning', val: todayMenu.breakfast, bg: 'bg-warning/10', color: 'text-warning' },
+                                    { label: 'Midday', val: todayMenu.lunch, bg: 'bg-primary/10', color: 'text-primary' },
+                                    { label: 'Twilight', val: todayMenu.dinner, bg: 'bg-indigo-500/10', color: 'text-indigo-500' }
                                 ].map((m, i) => (
-                                    <div key={i} className={`p-6 ${m.bg} rounded-3xl border border-white/5 ${m.borderHover} transition-all group text-center`}>
-                                        <p className={`text-[10px] font-black ${m.text} uppercase tracking-[0.2em] mb-4`}>{m.label}</p>
-                                        <p className="text-white font-black text-xl group-hover:scale-110 transition-transform duration-500">{m.val || '—'}</p>
+                                    <div key={i} className={`p-6 ${m.bg} rounded-2xl transition-all group text-center`}>
+                                        <p className={`text-xs font-semibold ${m.color} uppercase tracking-wider mb-2`}>{m.label}</p>
+                                        <p className="text-main font-semibold text-lg">{m.val || '—'}</p>
                                     </div>
                                 ))}
                             </div>
@@ -129,14 +128,14 @@ const StudentView = ({
                         <Card title="Broadcasts" icon={Bell} className="h-[450px] flex flex-col">
                             <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar flex-1 pb-4">
                                 {notices.map((n, i) => (
-                                    <div key={n._id || i} className={`p-5 rounded-3xl border transition-all hover:translate-x-1 ${n.priority === 'urgent' ? 'bg-rose-500/5 border-rose-500/20' : 'bg-primary-500/5 border-primary-500/20'}`}>
-                                        <div className={`flex items-start gap-3 font-black text-sm mb-2 ${n.priority === 'urgent' ? 'text-rose-400' : 'text-primary-400'}`}>
+                                    <div key={n._id || i} className={`p-5 rounded-xl border transition-all ${n.priority === 'urgent' ? 'border-l-4 border-l-danger bg-danger/5' : 'border-l-4 border-l-primary bg-app'}`}>
+                                        <div className={`flex items-start gap-3 font-semibold text-sm mb-2 ${n.priority === 'urgent' ? 'text-danger' : 'text-primary'}`}>
                                             <h4 className="flex-1 leading-tight">{n.title}</h4>
                                         </div>
-                                        <p className="text-slate-400 text-xs leading-relaxed font-medium line-clamp-3">{n.content}</p>
-                                        <div className="mt-4 flex items-center justify-between text-[8px] font-black text-slate-600 uppercase tracking-widest">
+                                        <p className="text-muted text-xs leading-relaxed line-clamp-3">{n.content}</p>
+                                        <div className="mt-4 flex items-center justify-between text-xs font-medium text-muted uppercase tracking-wider">
                                             <span>{new Date(n.created_at).toLocaleDateString()}</span>
-                                            {n.priority === 'urgent' && <span className="text-rose-500">Urgent Pulse</span>}
+                                            {n.priority === 'urgent' && <span className="text-danger">Urgent Pulse</span>}
                                         </div>
                                     </div>
                                 ))}
@@ -151,21 +150,20 @@ const StudentView = ({
                         <Card title="Resolution Hub" icon={MessageSquarePlus} className="h-[450px] flex flex-col">
                             <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar flex-1 pb-4">
                                 {complaints.map((c, i) => (
-                                    <div key={c._id || i} className="p-5 bg-white/5 border border-white/5 rounded-3xl hover:bg-white/10 hover:border-white/10 transition-all flex flex-col gap-4 group">
+                                    <div key={c._id || i} className="p-5 bg-app border border-border rounded-xl hover:border-primary/30 transition-all flex flex-col gap-4 group">
                                         <div className="flex justify-between items-start">
-                                            <h4 className="text-white font-black text-sm tracking-tight leading-none truncate pr-4">{c.title}</h4>
-                                            <span className={`px-2.5 py-1 rounded-full text-[8px] font-black uppercase tracking-widest shadow-xl shrink-0 ${
-                                                c.status === 'resolved' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                                                c.status === 'in_progress' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : 
-                                                'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                                            <h4 className="text-main font-semibold text-sm tracking-tight leading-none truncate pr-4">{c.title}</h4>
+                                            <span className={`px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider shrink-0 ${ c.status === 'resolved' ? 'bg-success/10 text-success' :
+                                                c.status === 'in_progress' ? 'bg-primary/10 text-primary' : 
+                                                'bg-warning/10 text-warning'
                                             }`}>
                                                 {c.status?.replace('_', ' ') || 'pending'}
                                             </span>
                                         </div>
-                                        <p className="text-slate-500 text-[11px] font-medium leading-relaxed line-clamp-2">{c.content}</p>
-                                        <div className="flex items-center justify-between opacity-30 group-hover:opacity-100 transition-opacity">
-                                            <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest">{new Date(c.created_at).toLocaleDateString()}</span>
-                                            <ArrowUpRight className="w-3.5 h-3.5 text-primary-400" />
+                                        <p className="text-muted text-sm font-medium leading-relaxed line-clamp-2">{c.content}</p>
+                                        <div className="flex items-center justify-between opacity-50 group-hover:opacity-100 transition-opacity pt-2 border-t border-border">
+                                            <span className="text-xs font-medium text-muted uppercase tracking-wider">{new Date(c.created_at).toLocaleDateString()}</span>
+                                            <ArrowUpRight className="w-4 h-4 text-primary" />
                                         </div>
                                     </div>
                                 ))}
@@ -183,20 +181,18 @@ const StudentView = ({
                 <div className="lg:col-span-4 space-y-8">
                     {/* Security Vault */}
                     <Card title="Security Vault" icon={ShieldCheck}>
-                        <div className="p-8 bg-gradient-to-br from-primary-600/10 via-primary-500/5 to-transparent rounded-[32px] border border-white/10 space-y-8 text-center relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-primary-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <div className="space-y-2 relative z-10">
-                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Active Deposit</p>
-                                <p className="text-5xl font-black text-white tracking-tighter shadow-primary-500/20">₹{profile?.deposit || 0}</p>
+                        <div className="p-6 bg-app rounded-xl border border-border space-y-6 text-center">
+                            <div className="space-y-1">
+                                <p className="text-xs font-medium text-muted uppercase tracking-wider">Active Deposit</p>
+                                <p className="text-4xl font-semibold text-main">₹{profile?.deposit || 0}</p>
                             </div>
-                            <div className="space-y-3 relative z-10">
-                                <div className="flex justify-between items-center bg-white/5 p-4 rounded-2xl border border-white/5">
-                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Compliance Status</span>
-                                    <span className={`px-3 py-1 rounded-lg font-black text-[9px] uppercase tracking-wider ${profile?.deposit_refund_status === 'refunded' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'}`}>
-                                        {profile?.deposit_refund_status?.replace('_', ' ') || 'Secured Stake'}
+                            <div className="space-y-3">
+                                <div className="flex justify-between items-center card-3d p-4 rounded-xl">
+                                    <span className="text-xs font-medium text-muted uppercase tracking-wider">Compliance</span>
+                                    <span className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${profile?.deposit_refund_status === 'refunded' ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'}`}>
+                                        {profile?.deposit_refund_status?.replace('_', ' ') || 'Secured'}
                                     </span>
                                 </div>
-                                <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest leading-none">Verified Protocol Active</p>
                             </div>
                         </div>
                     </Card>
@@ -205,22 +201,22 @@ const StudentView = ({
                     <Card title="Network Fabrics" icon={Wifi} className="flex flex-col max-h-[450px]">
                         <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar flex-1 pb-4">
                             {wifiConfigs.length > 0 ? wifiConfigs.map((w, i) => (
-                                <div key={i} className="bg-white/5 rounded-3xl p-5 border border-white/5 space-y-4 hover:border-indigo-500/30 transition-all group/wifi">
-                                    <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div key={i} className="bg-app rounded-xl p-5 border border-border space-y-4">
+                                    <div className="flex items-center justify-between border-b border-border pb-4">
                                         <div>
-                                            <h3 className="text-white font-black text-sm tracking-tight">{w.ssid || w.network_name}</h3>
-                                            <p className="text-[9px] font-black text-indigo-400 uppercase tracking-widest mt-1">Block {w.block} • Floor {w.floor}</p>
+                                            <h3 className="text-main font-semibold text-sm tracking-tight">{w.ssid || w.network_name}</h3>
+                                            <p className="text-xs font-medium text-muted uppercase tracking-wider mt-1">Block {w.block} • Floor {w.floor}</p>
                                         </div>
-                                        <div className={`w-2 h-2 rounded-full ${w.service_status === 'Active' || w.status === 'Active' ? 'bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-rose-500'}`} />
+                                        <div className={`w-2 h-2 rounded-full ${w.service_status === 'Active' || w.status === 'Active' ? 'bg-success animate-pulse' : 'bg-danger'}`} />
                                     </div>
-                                    <div className="flex items-center justify-between p-3 rounded-2xl bg-black/20 group-hover/wifi:bg-black/40 transition-colors cursor-pointer" onClick={() => setShowWifiPwd(p => p === w._id ? null : w._id)}>
+                                    <div className="flex items-center justify-between p-3 rounded-lg card-3d cursor-pointer hover:border-primary/30 transition-colors" onClick={() => setShowWifiPwd(p => p === w._id ? null : w._id)}>
                                         <div>
-                                            <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest mb-1 leading-none">Access Credential</p>
-                                            <p className="text-white font-black text-sm font-mono tracking-widest leading-none">
+                                            <p className="text-[10px] font-medium text-muted uppercase tracking-wider mb-1">Access Credential</p>
+                                            <p className="text-main font-semibold text-sm font-mono tracking-wider">
                                                 {showWifiPwd === w._id ? (w.password || w.network_password) : '••••••••'}
                                             </p>
                                         </div>
-                                        <span className="text-[9px] font-black text-primary-400 uppercase tracking-widest group-hover/wifi:text-white transition-colors">
+                                        <span className="text-xs font-medium text-primary uppercase tracking-wider">
                                             {showWifiPwd === w._id ? 'Hide' : 'Show'}
                                         </span>
                                     </div>
@@ -241,20 +237,20 @@ const StudentView = ({
                                 <a
                                     href={`${import.meta.env.VITE_API_URL}/uploads/documents/${profile.id_proof_path}`}
                                     target="_blank" rel="noreferrer"
-                                    className="flex items-center gap-4 p-5 bg-white/5 rounded-3xl border border-white/5 hover:bg-primary-500/10 hover:border-primary-500/30 transition-all group"
+                                    className="flex items-center gap-4 p-4 bg-app rounded-xl border border-border hover:border-primary/30 transition-all group"
                                 >
-                                    <div className="p-3 bg-emerald-500/10 rounded-2xl text-emerald-400">
-                                        <ShieldCheck className="w-6 h-6" />
+                                    <div className="p-3 bg-success/10 rounded-lg text-success">
+                                        <ShieldCheck className="w-5 h-5" />
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-white font-black text-sm tracking-tight mb-0.5">Verified Identity</p>
-                                        <p className="text-slate-500 text-[9px] font-black uppercase tracking-widest leading-none">Gov Proof Vaulted</p>
+                                        <p className="text-main font-semibold text-sm tracking-tight">Verified Identity</p>
+                                        <p className="text-muted text-[10px] font-medium uppercase tracking-wider mt-0.5">Gov Proof Vaulted</p>
                                     </div>
-                                    <ArrowUpRight className="w-4 h-4 text-slate-600 group-hover:text-primary-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                                    <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-primary transition-all" />
                                 </a>
                             )}
-                            <div className="p-5 text-center text-slate-800 border-2 border-dashed border-slate-800 rounded-3xl">
-                               <p className="text-[9px] font-black uppercase tracking-widest opacity-20">End-to-End Encrypted</p>
+                            <div className="p-4 text-center border-2 border-dashed border-border rounded-xl">
+                               <p className="text-xs font-medium text-muted uppercase tracking-wider">End-to-End Encrypted</p>
                             </div>
                         </div>
                     </Card>

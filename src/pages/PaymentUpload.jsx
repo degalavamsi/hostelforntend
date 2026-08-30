@@ -187,18 +187,18 @@ const PaymentUpload = () => {
     return (
         <div className="w-full space-y-10">
             <div className="flex items-center justify-between">
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-xl font-extrabold text-white tracking-tight">
+                <div>
+                    <h1 className="text-2xl font-semibold text-main tracking-tight">
                         {isAdmin ? 'Payment Management' : 'Your Payments'}
                     </h1>
-                    <p className="text-slate-400 text-[10px] font-medium tracking-tight">
+                    <p className="text-muted text-xs font-medium uppercase tracking-wider mt-1">
                         {isAdmin ? 'Verify receipts, update balances, and remind students.' : 'Upload monthly receipts and track your status.'}
                     </p>
                 </div>
                 {isAdmin && (
                     <button
                         onClick={() => setShowRentModal(true)}
-                        className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-2xl font-extrabold flex items-center gap-2 shadow-lg shadow-primary-900/20 transition-all text-sm"
+                        className="bg-primary hover:opacity-90 text-white px-5 py-2.5 rounded-xl font-medium flex items-center gap-2 shadow-lg shadow-primary/20 transition-all text-sm"
                     >
                         <DollarSign className="w-5 h-5" /> Generate Rent
                     </button>
@@ -208,13 +208,13 @@ const PaymentUpload = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 {!isAdmin && (
                     <div className="lg:col-span-1 space-y-6">
-                        <div className="bg-slate-900 border border-slate-800 rounded-[32px] p-8 space-y-6 shadow-xl">
-                            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                                <Upload className="w-5 h-5 text-primary-400" /> New Payment
+                        <div className="card-3d rounded-3xl p-8 space-y-6">
+                            <h2 className="text-xl font-semibold text-main tracking-tight flex items-center gap-2">
+                                <Upload className="w-5 h-5 text-primary" /> New Payment
                             </h2>
                             <form onSubmit={handleUpload} className="space-y-4">
                                 <select
-                                    className="w-full bg-slate-800 border-none rounded-2xl p-4 text-white outline-none focus:ring-1 focus:ring-primary-500"
+                                    className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                     value={paymentData.type || 'rent'}
                                     onChange={(e) => setPaymentData({ ...paymentData, type: e.target.value })}
                                 >
@@ -223,7 +223,7 @@ const PaymentUpload = () => {
                                 </select>
                                 <div className="grid grid-cols-2 gap-4">
                                     <select
-                                        className="w-full bg-slate-800 border-none rounded-2xl p-4 text-white outline-none focus:ring-1 focus:ring-primary-500"
+                                        className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                         value={paymentData.month}
                                         onChange={(e) => setPaymentData({ ...paymentData, month: e.target.value })}
                                     >
@@ -232,7 +232,7 @@ const PaymentUpload = () => {
                                         ))}
                                     </select>
                                     <select
-                                        className="w-full bg-slate-800 border-none rounded-2xl p-4 text-white outline-none focus:ring-1 focus:ring-primary-500"
+                                        className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                         value={paymentData.year}
                                         onChange={(e) => setPaymentData({ ...paymentData, year: e.target.value })}
                                     >
@@ -242,30 +242,30 @@ const PaymentUpload = () => {
                                     </select>
                                 </div>
                                 <div className="relative">
-                                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                                     <input
                                         type="number" placeholder="Amount" required
-                                        className="w-full bg-slate-800 border-none rounded-2xl p-4 pl-12 text-white outline-none focus:ring-1 focus:ring-primary-500"
+                                        className="w-full bg-app border border-border rounded-xl p-3.5 pl-11 text-main text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                         value={paymentData.amount}
                                         onChange={(e) => setPaymentData({ ...paymentData, amount: e.target.value })}
                                     />
                                 </div>
-                                <div className="border-2 border-dashed border-slate-700 rounded-2xl p-6 text-center hover:border-primary-500/50 transition-colors cursor-pointer relative">
+                                <div className="border-2 border-dashed border-border bg-app rounded-xl p-6 text-center hover:border-primary/50 transition-colors cursor-pointer relative">
                                     <input
                                         type="file" required
                                         className="absolute inset-0 opacity-0 cursor-pointer"
                                         onChange={(e) => setFile(e.target.files[0])}
                                     />
                                     <div className="space-y-2">
-                                        <CreditCard className="w-8 h-8 text-slate-500 mx-auto" />
-                                        <p className="text-slate-400 text-sm font-medium">
+                                        <CreditCard className="w-8 h-8 text-muted mx-auto" />
+                                        <p className="text-muted text-sm font-medium">
                                             {file ? file.name : 'Choose receipt'}
                                         </p>
                                     </div>
                                 </div>
                                 <button
                                     type="submit" disabled={uploading}
-                                    className="w-full bg-primary-600 hover:bg-primary-500 text-white font-bold py-4 rounded-2xl transition-all flex items-center justify-center gap-2"
+                                    className="w-full bg-primary hover:opacity-90 text-white font-medium py-3.5 rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
                                 >
                                     {uploading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Upload Receipt'}
                                 </button>
@@ -275,110 +275,111 @@ const PaymentUpload = () => {
                 )}
 
                 <div className={`${isAdmin ? 'lg:col-span-3' : 'lg:col-span-2'} space-y-6`}>
-                    <div className="bg-slate-900 border border-slate-800 rounded-[32px] overflow-hidden shadow-2xl">
-                        <table className="w-full text-left border-collapse">
-                            <thead>
-                                <tr className="bg-white/5 border-b border-slate-800">
-                                    <th className="px-8 py-5 text-sm font-bold text-slate-400 uppercase tracking-widest">Details</th>
-                                    {isAdmin && <th className="px-8 py-5 text-sm font-bold text-slate-400 uppercase tracking-widest">Student</th>}
-                                    <th className="px-8 py-5 text-sm font-bold text-slate-400 uppercase tracking-widest">Amount & Due</th>
-                                    <th className="px-8 py-5 text-sm font-bold text-slate-400 uppercase tracking-widest">Status</th>
-                                    <th className="px-8 py-5 text-sm font-bold text-slate-400 uppercase tracking-widest text-right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-800/50">
-                                {payments.map((pay) => (
-                                    <tr key={pay._id} className="hover:bg-white/5 transition-colors group">
-                                        <td className="px-8 py-6">
-                                            <p className="text-white font-bold">{pay.month} {pay.year}</p>
-                                            <p className="text-slate-500 text-xs mt-1">Ref: {new Date(pay.created_at).toLocaleDateString()}</p>
-                                        </td>
-                                        {isAdmin && (
-                                            <td className="px-8 py-6">
-                                                <p className="text-white font-bold text-sm">
-                                                    {pay.student_name || 'Unknown'}
-                                                </p>
-                                                <div className="flex items-center gap-2 mt-1">
-                                                    {pay.student_room && pay.student_room !== '—' && (
-                                                        <span className="px-2 py-0.5 bg-primary-500/10 text-primary-400 rounded-lg text-[10px] font-black">
-                                                            Room {pay.student_room}
-                                                        </span>
-                                                    )}
-                                                    {pay.student_bed && (
-                                                        <span className="px-2 py-0.5 bg-slate-800 text-slate-400 rounded-lg text-[10px] font-black">
-                                                            Bed {pay.student_bed}
-                                                        </span>
+                    <div className="card-3d rounded-3xl overflow-hidden">
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr className="bg-app border-b border-border">
+                                        <th className="px-6 py-4 text-xs font-medium text-muted uppercase tracking-wider">Details</th>
+                                        {isAdmin && <th className="px-6 py-4 text-xs font-medium text-muted uppercase tracking-wider">Student</th>}
+                                        <th className="px-6 py-4 text-xs font-medium text-muted uppercase tracking-wider">Amount & Due</th>
+                                        <th className="px-6 py-4 text-xs font-medium text-muted uppercase tracking-wider">Status</th>
+                                        <th className="px-6 py-4 text-xs font-medium text-muted uppercase tracking-wider text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-border">
+                                    {payments.map((pay) => (
+                                        <tr key={pay._id} className="hover:bg-app/50 transition-colors group">
+                                            <td className="px-6 py-4">
+                                                <p className="text-main font-semibold text-sm">{pay.month} {pay.year}</p>
+                                                <p className="text-muted text-[10px] mt-1 font-medium">Ref: {new Date(pay.created_at).toLocaleDateString()}</p>
+                                            </td>
+                                            {isAdmin && (
+                                                <td className="px-6 py-4">
+                                                    <p className="text-main font-semibold text-sm">
+                                                        {pay.student_name || 'Unknown'}
+                                                    </p>
+                                                    <div className="flex items-center gap-1.5 mt-1.5">
+                                                        {pay.student_room && pay.student_room !== '—' && (
+                                                            <span className="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-bold tracking-tight">
+                                                                Room {pay.student_room}
+                                                            </span>
+                                                        )}
+                                                        {pay.student_bed && (
+                                                            <span className="px-2 py-0.5 bg-border text-muted rounded text-[10px] font-bold tracking-tight">
+                                                                Bed {pay.student_bed}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            )}
+                                            <td className="px-6 py-4">
+                                                <div className="space-y-1">
+                                                    <div className="flex justify-between items-center text-xs w-28">
+                                                        <span className="text-muted font-medium uppercase tracking-wider">Total</span>
+                                                        <span className="text-main font-semibold">₹{pay.amount}</span>
+                                                    </div>
+                                                    <div className="flex justify-between items-center text-xs w-28">
+                                                        <span className="text-success font-medium uppercase tracking-wider">Paid</span>
+                                                        <span className="text-success font-semibold">₹{pay.amount_paid || 0}</span>
+                                                    </div>
+                                                    <div className="flex justify-between items-center text-[10px] w-28 border-t border-border pt-1 mt-1">
+                                                        <span className="text-danger font-medium uppercase tracking-wider">Bal</span>
+                                                        <span className="text-danger font-semibold">₹{pay.balance !== undefined ? pay.balance : pay.amount}</span>
+                                                    </div>
+                                                    {pay.due_date && (
+                                                        <p className="text-muted text-[10px] uppercase font-medium tracking-wider pt-1.5">
+                                                            Due: {new Date(pay.due_date).toLocaleDateString()}
+                                                        </p>
                                                     )}
                                                 </div>
                                             </td>
-                                        )}
-                                        <td className="px-8 py-6">
-                                            <div className="space-y-1">
-                                                <div className="flex justify-between items-center text-xs w-28">
-                                                    <span className="text-slate-500 font-bold tracking-widest uppercase">Total</span>
-                                                    <span className="text-white font-black">₹{pay.amount}</span>
+                                            <td className="px-6 py-4">
+                                                <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5 ${pay.status === 'paid' ? 'bg-success/10 text-success' :
+                                                    pay.status === 'partial' ? 'bg-primary/10 text-primary' :
+                                                        pay.status === 'verified' ? 'bg-success/10 text-success' :
+                                                            'bg-danger/10 text-danger'
+                                                    }`}>
+                                                    <div className={`w-1.5 h-1.5 rounded-full ${pay.status === 'paid' || pay.status === 'verified' ? 'bg-success' :
+                                                        pay.status === 'partial' ? 'bg-primary' :
+                                                            'bg-danger'
+                                                        }`}></div>
+                                                    {(pay.status === 'pending' && !pay.is_paid) ? 'UNPAID' : pay.status?.replace('_', ' ')}
+                                                </span>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    {pay.receipt_path && (
+                                                        <a
+                                                            href={`${import.meta.env.VITE_API_URL || '/api'}/uploads/receipts/${pay.receipt_path}`}
+                                                            target="_blank" rel="noreferrer"
+                                                            className="p-2 bg-app text-muted hover:text-main hover:bg-border rounded-lg transition-all"
+                                                            title="View Receipt"
+                                                        >
+                                                            <Eye className="w-4 h-4" />
+                                                        </a>
+                                                    )}
+                                                    {isAdmin && (
+                                                        <>
+                                                            <button onClick={() => openStatusModal(pay)} className="p-2 bg-primary/10 text-primary hover:text-white hover:bg-primary rounded-lg transition-all" title="Update Status & Balance">
+                                                                <Edit2 className="w-4 h-4" />
+                                                            </button>
+                                                            <button onClick={() => handleRemind(pay)} className="p-2 bg-warning/10 text-warning hover:text-white hover:bg-warning rounded-lg transition-all" title="Send Payment Reminder with QR">
+                                                                <BellRing className="w-4 h-4" />
+                                                            </button>
+                                                        </>
+                                                    )}
                                                 </div>
-                                                <div className="flex justify-between items-center text-xs w-28">
-                                                    <span className="text-green-500/70 font-bold tracking-widest uppercase">Paid</span>
-                                                    <span className="text-green-400 font-black">₹{pay.amount_paid || 0}</span>
-                                                </div>
-                                                <div className="flex justify-between items-center text-[10px] w-28 border-t border-slate-700/50 pt-1 mt-1">
-                                                    <span className="text-red-400/70 font-bold tracking-widest uppercase">Bal</span>
-                                                    <span className="text-red-400 font-black">₹{pay.balance !== undefined ? pay.balance : pay.amount}</span>
-                                                </div>
-                                                {pay.due_date && (
-                                                    <p className="text-slate-500 text-[9px] uppercase font-bold tracking-tighter pt-1.5">
-                                                        Due: {new Date(pay.due_date).toLocaleDateString()}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <span className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5 ${pay.status === 'paid' ? 'bg-green-500/10 text-green-400' :
-                                                pay.status === 'partial' ? 'bg-blue-500/10 text-blue-400' :
-                                                    pay.status === 'verified' ? 'bg-green-500/10 text-green-400' :
-                                                        'bg-red-500/10 text-red-400'
-                                                }`}>
-                                                <div className={`w-1.5 h-1.5 rounded-full ${pay.status === 'paid' || pay.status === 'verified' ? 'bg-green-400' :
-                                                    pay.status === 'partial' ? 'bg-blue-400' :
-                                                        'bg-red-400'
-                                                    }`}></div>
-                                                {(pay.status === 'pending' && !pay.is_paid) ? 'UNPAID' : pay.status?.replace('_', ' ')}
-                                            </span>
-                                        </td>
-                                        <td className="px-8 py-6 text-right">
-                                            <div className="flex items-center justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                {pay.receipt_path && (
-                                                    <a
-                                                        href={`${import.meta.env.VITE_API_URL || '/api'}/uploads/receipts/${pay.receipt_path}`}
-
-                                                        target="_blank" rel="noreferrer"
-                                                        className="p-2.5 bg-slate-800 text-slate-400 hover:text-white rounded-xl transition-all"
-                                                        title="View Receipt"
-                                                    >
-                                                        <Eye className="w-4 h-4" />
-                                                    </a>
-                                                )}
-                                                {isAdmin && (
-                                                    <>
-                                                        <button onClick={() => openStatusModal(pay)} className="p-2.5 bg-blue-500/10 text-blue-400 hover:text-white hover:bg-blue-500 rounded-xl transition-all" title="Update Status & Balance">
-                                                            <Edit2 className="w-4 h-4" />
-                                                        </button>
-                                                        <button onClick={() => handleRemind(pay)} className="p-2.5 bg-amber-500/10 text-amber-400 hover:text-white hover:bg-amber-500 rounded-xl transition-all" title="Send Payment Reminder with QR">
-                                                            <BellRing className="w-4 h-4" />
-                                                        </button>
-                                                    </>
-                                                )}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                         {payments.length === 0 && (
-                            <div className="p-20 text-center">
-                                <AlertCircle className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-                                <p className="text-slate-500 font-medium text-lg">No payment records found.</p>
+                            <div className="p-16 text-center">
+                                <AlertCircle className="w-10 h-10 text-muted mx-auto mb-3 opacity-30" />
+                                <p className="text-muted font-medium text-sm">No payment records found.</p>
                             </div>
                         )}
                     </div>
@@ -387,28 +388,28 @@ const PaymentUpload = () => {
 
             {/* Status Update Modal */}
             {statusModal.show && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-[32px] p-8 shadow-2xl relative">
-                        <button onClick={() => setStatusModal({ show: false, pay: null, amount_paid: '', status: 'pending' })} className="absolute top-6 right-6 text-slate-500 hover:text-white">
+                <div className="fixed inset-0 bg-main/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="card-3d w-full max-w-sm rounded-3xl p-8 relative">
+                        <button onClick={() => setStatusModal({ show: false, pay: null, amount_paid: '', status: 'pending' })} className="absolute top-6 right-6 text-muted hover:text-main bg-app p-2 rounded-xl transition-colors">
                             <X className="w-5 h-5" />
                         </button>
-                        <h2 className="text-2xl font-black text-white mb-2">Update <span className="text-blue-500">Status</span></h2>
-                        <p className="text-slate-400 text-sm mb-6">Modify the payment progress for {statusModal.pay?.student_name}.</p>
+                        <h2 className="text-2xl font-semibold text-main tracking-tight mb-2">Update <span className="text-primary">Status</span></h2>
+                        <p className="text-muted text-xs font-medium mb-6">Modify the payment progress for {statusModal.pay?.student_name}.</p>
                         <form onSubmit={handleUpdateStatus} className="space-y-4">
                             <div className="space-y-1.5">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Amount Paid (₹)</label>
-                                <input type="number" required className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white outline-none focus:border-blue-500" value={statusModal.amount_paid} onChange={(e) => setStatusModal({ ...statusModal, amount_paid: e.target.value })} />
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Amount Paid (₹)</label>
+                                <input type="number" required className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" value={statusModal.amount_paid} onChange={(e) => setStatusModal({ ...statusModal, amount_paid: e.target.value })} />
                             </div>
                             <div className="space-y-1.5">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Status</label>
-                                <select className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white outline-none focus:border-blue-500" value={statusModal.status} onChange={(e) => setStatusModal({ ...statusModal, status: e.target.value })}>
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Status</label>
+                                <select className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" value={statusModal.status} onChange={(e) => setStatusModal({ ...statusModal, status: e.target.value })}>
                                     <option value="unpaid">Unpaid</option>
                                     <option value="partial">Partial Payment</option>
                                     <option value="paid">Fully Paid</option>
                                     <option value="verified">Verified</option>
                                 </select>
                             </div>
-                            <button type="submit" className="w-full mt-4 bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-2xl shadow-lg shadow-blue-900/20 transition-all">Save Progress</button>
+                            <button type="submit" className="w-full mt-4 bg-primary hover:opacity-90 text-white font-medium py-3.5 rounded-xl shadow-lg shadow-primary/20 transition-all">Save Progress</button>
                         </form>
                     </div>
                 </div>
@@ -416,17 +417,22 @@ const PaymentUpload = () => {
 
             {/* Rent Generation Modal */}
             {showRentModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-slate-900 border border-slate-800 rounded-[32px] w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
-                        <div className="p-8 border-b border-slate-800 bg-white/5 sticky top-0 z-10 rounded-t-[32px] backdrop-blur">
-                            <h2 className="text-2xl font-bold text-white">Generate <span className="text-primary-500">Rent</span></h2>
-                            <p className="text-slate-400 text-sm mt-1">Create monthly rent records for all approved students.</p>
+                <div className="fixed inset-0 bg-main/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="card-3d rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto flex flex-col custom-scrollbar">
+                        <div className="p-6 border-b border-border bg-app sticky top-0 z-10 rounded-t-3xl backdrop-blur flex justify-between items-start">
+                            <div>
+                                <h2 className="text-xl font-semibold text-main tracking-tight">Generate <span className="text-primary">Rent</span></h2>
+                                <p className="text-muted text-[10px] uppercase tracking-wider font-medium mt-1">Create monthly rent records.</p>
+                            </div>
+                            <button onClick={() => setShowRentModal(false)} className="text-muted hover:text-main bg-border/50 p-2 rounded-xl transition-colors">
+                                <X className="w-5 h-5" />
+                            </button>
                         </div>
-                        <form onSubmit={handleGenerateRent} className="p-8 space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-slate-400 uppercase tracking-wider">Select Student</label>
+                        <form onSubmit={handleGenerateRent} className="p-6 space-y-5">
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Select Student</label>
                                 <select
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 outline-none"
+                                    className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     value={rentParams.student_id}
                                     onChange={(e) => setRentParams({ ...rentParams, student_id: e.target.value })}
                                 >
@@ -437,10 +443,10 @@ const PaymentUpload = () => {
                                 </select>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-slate-400 uppercase tracking-wider">Month</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Month</label>
                                     <select
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 outline-none"
+                                        className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         value={rentParams.month}
                                         onChange={(e) => setRentParams({ ...rentParams, month: e.target.value })}
                                     >
@@ -449,10 +455,10 @@ const PaymentUpload = () => {
                                         ))}
                                     </select>
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-bold text-slate-400 uppercase tracking-wider">Year</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Year</label>
                                     <select
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 outline-none"
+                                        className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         value={rentParams.year}
                                         onChange={(e) => setRentParams({ ...rentParams, year: e.target.value })}
                                     >
@@ -462,66 +468,66 @@ const PaymentUpload = () => {
                                     </select>
                                 </div>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-slate-400 uppercase tracking-wider">Amount (₹)</label>
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Amount (₹)</label>
                                 <input
                                     type="number" required
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 outline-none"
+                                    className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     placeholder="Total amount"
                                     value={rentParams.amount}
                                     onChange={(e) => setRentParams({ ...rentParams, amount: e.target.value })}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-bold text-slate-400 uppercase tracking-wider">Due Date</label>
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Due Date</label>
                                 <input
                                     type="date" required
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:ring-2 focus:ring-primary-500 outline-none"
+                                    className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     value={rentParams.due_date}
                                     onChange={(e) => setRentParams({ ...rentParams, due_date: e.target.value })}
                                 />
                             </div>
 
                             {/* ── Payment Details for Notification ── */}
-                            <div className="border-t border-white/5 pt-5 space-y-4">
-                                <p className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
-                                    <Smartphone className="w-3 h-3" /> Payment Info for Notification (optional)
+                            <div className="border-t border-border pt-5 space-y-4">
+                                <p className="text-[10px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5">
+                                    <Smartphone className="w-3.5 h-3.5" /> Payment Info for Notification (optional)
                                 </p>
                                 <div className="space-y-1.5">
-                                    <label className="text-[9px] font-extrabold text-slate-600 uppercase tracking-widest">UPI / PhonePe ID</label>
+                                    <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">UPI / PhonePe ID</label>
                                     <input
                                         type="text"
                                         placeholder="e.g. hostel@paytm or 98765@upi"
-                                        className="w-full bg-slate-950 border border-white/10 rounded-2xl p-3 text-white placeholder:text-slate-700 outline-none focus:border-amber-500 transition-colors text-sm"
+                                        className="w-full bg-app border border-border rounded-xl p-3 text-main text-sm font-medium placeholder:text-muted/50 focus:border-warning focus:ring-2 focus:ring-warning/20 outline-none transition-all"
                                         value={rentParams.upi_id}
                                         onChange={e => setRentParams({ ...rentParams, upi_id: e.target.value })}
                                     />
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label className="text-[9px] font-extrabold text-slate-600 uppercase tracking-widest flex items-center gap-1.5">
-                                        <QrCode className="w-3 h-3" /> QR Code Photo
+                                    <label className="text-[10px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5 ml-1">
+                                        <QrCode className="w-3.5 h-3.5" /> QR Code Photo
                                     </label>
-                                    <label className={`flex items-center gap-3 w-full border border-dashed rounded-2xl p-3 cursor-pointer transition-all ${rentQrFile ? 'border-amber-500/50 bg-amber-500/5' : 'border-white/10 hover:border-amber-500/30'}`}>
+                                    <label className={`flex items-center gap-3 w-full border border-dashed rounded-xl p-3.5 cursor-pointer transition-all ${rentQrFile ? 'border-warning/50 bg-warning/5' : 'border-border bg-app hover:border-warning/30'}`}>
                                         <input type="file" accept="image/*" className="hidden"
                                             onChange={e => { setRentQrFile(e.target.files[0]); setRentQrUrl(''); }} />
-                                        <QrCode className={`w-5 h-5 ${rentQrFile ? 'text-amber-400' : 'text-slate-700'}`} />
-                                        <span className={`text-xs font-bold ${rentQrFile ? 'text-amber-400' : 'text-slate-600'}`}>
+                                        <QrCode className={`w-5 h-5 ${rentQrFile ? 'text-warning' : 'text-muted'}`} />
+                                        <span className={`text-xs font-medium ${rentQrFile ? 'text-warning' : 'text-muted'}`}>
                                             {rentQrFile ? rentQrFile.name : 'Click to upload QR photo (PhonePe, GPay, Paytm)'}
                                         </span>
                                     </label>
                                 </div>
                             </div>
 
-                            <div className="flex gap-4 pt-2">
+                            <div className="flex gap-4 pt-4">
                                 <button
                                     type="button" onClick={() => setShowRentModal(false)}
-                                    className="flex-1 px-6 py-4 rounded-2xl font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-all border border-slate-800"
+                                    className="flex-1 px-4 py-3 rounded-xl font-medium text-muted hover:text-main bg-app hover:bg-border transition-all border border-border"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="flex-1 px-6 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-2xl font-bold shadow-lg shadow-primary-900/20 transition-all"
+                                    className="flex-1 px-4 py-3 bg-primary hover:opacity-90 text-white rounded-xl font-medium shadow-lg shadow-primary/20 transition-all"
                                 >
                                     Confirm
                                 </button>
@@ -533,20 +539,20 @@ const PaymentUpload = () => {
 
             {/* 💸 Payment Reminder with QR Modal */}
             {reminderModal.show && (
-                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
-                    <div className="bg-slate-900 border border-white/10 w-full max-w-md rounded-[32px] p-8 shadow-2xl relative animate-in zoom-in-95 duration-200">
-                        <button onClick={() => setReminderModal(m => ({ ...m, show: false }))} className="absolute top-6 right-6 text-slate-500 hover:text-white">
-                            <X className="w-6 h-6" />
+                <div className="fixed inset-0 bg-main/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="card-3d w-full max-w-md rounded-3xl p-8 relative animate-in zoom-in-95 duration-200">
+                        <button onClick={() => setReminderModal(m => ({ ...m, show: false }))} className="absolute top-6 right-6 text-muted hover:text-main bg-app p-2 rounded-xl transition-colors">
+                            <X className="w-5 h-5" />
                         </button>
 
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="p-3 bg-amber-500/10 rounded-2xl text-amber-400">
+                            <div className="p-3 bg-warning/10 rounded-xl text-warning">
                                 <BellRing className="w-6 h-6" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-extrabold text-white">Send Payment <span className="text-amber-400">Reminder</span></h2>
-                                <p className="text-slate-500 text-[10px] font-medium tracking-tight mt-0.5">
-                                    To: <span className="text-white font-bold">{reminderModal.pay?.student_name || 'Student'}</span>
+                                <h2 className="text-xl font-semibold text-main tracking-tight">Send Payment <span className="text-warning">Reminder</span></h2>
+                                <p className="text-muted text-xs font-medium mt-0.5">
+                                    To: <span className="text-main font-semibold">{reminderModal.pay?.student_name || 'Student'}</span>
                                     &nbsp;— {reminderModal.pay?.month} {reminderModal.pay?.year}
                                     &nbsp;— ₹{reminderModal.pay?.balance ?? reminderModal.pay?.amount}
                                 </p>
@@ -556,13 +562,13 @@ const PaymentUpload = () => {
                         <form onSubmit={handleSendReminder} className="space-y-5">
                             {/* UPI ID */}
                             <div className="space-y-1.5">
-                                <label className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
-                                    <Smartphone className="w-3 h-3" /> UPI / PhonePe Number
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5 ml-1">
+                                    <Smartphone className="w-3.5 h-3.5" /> UPI / PhonePe Number
                                 </label>
                                 <input
                                     type="text"
                                     placeholder="e.g. name@paytm or 9876543210@upi"
-                                    className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white placeholder:text-slate-700 outline-none focus:border-amber-500 transition-colors text-sm"
+                                    className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium placeholder:text-muted/50 focus:border-warning focus:ring-2 focus:ring-warning/20 outline-none transition-all"
                                     value={reminderModal.upi_id}
                                     onChange={e => setReminderModal(m => ({ ...m, upi_id: e.target.value }))}
                                 />
@@ -570,10 +576,10 @@ const PaymentUpload = () => {
 
                             {/* QR Upload */}
                             <div className="space-y-1.5">
-                                <label className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
-                                    <QrCode className="w-3 h-3" /> Upload QR Code Photo
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider flex items-center gap-1.5 ml-1">
+                                    <QrCode className="w-3.5 h-3.5" /> Upload QR Code Photo
                                 </label>
-                                <label className={`flex flex-col items-center justify-center w-full border-2 border-dashed rounded-2xl p-6 cursor-pointer transition-all ${reminderModal.qrFile ? 'border-amber-500/50 bg-amber-500/5' : 'border-white/10 hover:border-amber-500/30 bg-slate-950/50'}`}>
+                                <label className={`flex flex-col items-center justify-center w-full border-2 border-dashed rounded-2xl p-6 cursor-pointer transition-all ${reminderModal.qrFile ? 'border-warning/50 bg-warning/5' : 'border-border bg-app hover:border-warning/30'}`}>
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -582,15 +588,15 @@ const PaymentUpload = () => {
                                     />
                                     {reminderModal.qrFile ? (
                                         <div className="text-center">
-                                            <QrCode className="w-10 h-10 text-amber-400 mx-auto mb-2" />
-                                            <p className="text-amber-400 font-extrabold text-xs">{reminderModal.qrFile.name}</p>
-                                            <p className="text-slate-600 text-[9px] mt-0.5">Click to change</p>
+                                            <QrCode className="w-10 h-10 text-warning mx-auto mb-2" />
+                                            <p className="text-warning font-semibold text-xs">{reminderModal.qrFile.name}</p>
+                                            <p className="text-muted text-[10px] mt-1 font-medium">Click to change</p>
                                         </div>
                                     ) : (
                                         <div className="text-center">
-                                            <QrCode className="w-10 h-10 text-slate-700 mx-auto mb-2" />
-                                            <p className="text-slate-500 text-xs font-bold">Click to upload QR photo</p>
-                                            <p className="text-slate-700 text-[9px] mt-0.5">PhonePe, GPay, Paytm QR — PNG, JPG</p>
+                                            <QrCode className="w-10 h-10 text-muted mx-auto mb-2" />
+                                            <p className="text-muted text-xs font-medium">Click to upload QR photo</p>
+                                            <p className="text-muted/70 text-[10px] mt-1 font-medium">PhonePe, GPay, Paytm QR — PNG, JPG</p>
                                         </div>
                                     )}
                                 </label>
@@ -598,25 +604,25 @@ const PaymentUpload = () => {
 
                             {/* Custom Message */}
                             <div className="space-y-1.5">
-                                <label className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest">Additional Note (optional)</label>
+                                <label className="text-[10px] font-bold text-muted uppercase tracking-wider ml-1">Additional Note (optional)</label>
                                 <textarea
                                     rows="2"
                                     placeholder="e.g. Please pay before 15th to avoid late fee..."
-                                    className="w-full bg-slate-950 border border-white/10 rounded-2xl p-4 text-white placeholder:text-slate-700 outline-none focus:border-amber-500 transition-colors text-sm resize-none"
+                                    className="w-full bg-app border border-border rounded-xl p-3.5 text-main text-sm font-medium placeholder:text-muted/50 focus:border-warning focus:ring-2 focus:ring-warning/20 outline-none transition-all resize-none"
                                     value={reminderModal.message}
                                     onChange={e => setReminderModal(m => ({ ...m, message: e.target.value }))}
                                 />
                             </div>
 
-                            <div className="flex gap-4 pt-2">
+                            <div className="flex gap-4 pt-4">
                                 <button type="button" onClick={() => setReminderModal(m => ({ ...m, show: false }))}
-                                    className="flex-1 py-4 text-slate-500 font-bold hover:text-white transition-colors border border-white/5 rounded-2xl uppercase text-[10px] tracking-widest">
+                                    className="flex-1 py-3 text-muted font-medium bg-app hover:bg-border hover:text-main transition-colors border border-border rounded-xl">
                                     Cancel
                                 </button>
                                 <button type="submit" disabled={reminderModal.sending}
-                                    className="flex-1 bg-amber-500 hover:bg-amber-400 text-slate-900 font-extrabold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 uppercase text-[10px] tracking-widest">
+                                    className="flex-1 bg-warning hover:opacity-90 text-white font-medium py-3 rounded-xl shadow-lg shadow-warning/20 transition-all flex items-center justify-center gap-2">
                                     {reminderModal.sending
-                                        ? <Loader2 className="w-4 h-4 animate-spin" />
+                                        ? <Loader2 className="w-5 h-5 animate-spin" />
                                         : <><Send className="w-4 h-4" /> Send Reminder</>
                                     }
                                 </button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, DoorOpen, CreditCard, Bell, Utensils, ShieldCheck, LogOut, User as UserIcon, Zap, Settings2, UserCheck } from 'lucide-react';
+import { LayoutDashboard, Users, DoorOpen, CreditCard, Bell, Utensils, ShieldCheck, LogOut, User as UserIcon, Zap, Settings2, UserCheck, X } from 'lucide-react';
 import { useAuth } from '../context/useAuth';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -28,59 +28,72 @@ const Sidebar = ({ isOpen, onClose }) => {
             {/* Mobile Overlay */}
             {isOpen && (
                 <div 
-                    className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] lg:hidden"
+                    className="fixed inset-0 bg-main/20 backdrop-blur-sm z-[100] lg:hidden"
                     onClick={onClose}
                 />
             )}
 
             <aside className={`
-                fixed lg:sticky top-0 left-0 h-screen w-72 bg-slate-950 border-r border-white/5 flex flex-col z-[101] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+                fixed lg:sticky top-0 left-0 h-screen w-[280px] bg-surface border-r border-border
+                flex flex-col z-[101] overflow-hidden
+                transition-transform duration-300 ease-out
                 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
             `}>
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-primary-700" />
                 
-                <div className="p-8 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <div className="p-2.5 bg-primary-600 rounded-2xl shadow-lg shadow-primary-900/20">
-                            <ShieldCheck className="w-7 h-7 text-white" />
+                {/* Brand Header */}
+                <div className="h-20 px-6 flex items-center justify-between border-b border-border shrink-0">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+                            <ShieldCheck className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                           <h1 className="text-2xl font-black text-white tracking-tighter leading-none">
-                              Hostel<span className="text-primary-500">Pro</span>
+                           <h1 className="text-xl font-bold text-main tracking-tight leading-none">
+                               Hostel<span className="text-primary">Pro</span>
                            </h1>
-                           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-1">Version 2.0</p>
+                           <p className="text-[10px] font-medium text-muted mt-0.5">Management System</p>
                         </div>
                     </div>
+                    <button onClick={onClose} className="p-2 rounded-lg text-muted hover:text-main hover:bg-app lg:hidden transition-colors">
+                        <X className="w-5 h-5" />
+                    </button>
                 </div>
 
-            <nav className="flex-1 px-4 space-y-1 py-8 overflow-y-auto custom-scrollbar">
-                {filteredItems.map((item) => (
-                    <NavLink
-                        key={item.name}
-                        to={item.path}
-                        className={({ isActive }) =>
-                            `flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group ${isActive
-                                ? 'bg-primary-600/10 text-primary-400 border border-primary-500/10 shadow-[inner_0_0_20px_rgba(99,102,241,0.05)]'
-                                : 'text-slate-500 hover:bg-white/5 hover:text-slate-200 border border-transparent'
-                            }`
-                        }
-                    >
-                        <item.icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 tracking-widest`} />
-                        <span className="font-bold tracking-tight">{item.name}</span>
-                    </NavLink>
-                ))}
-            </nav>
+                {/* Navigation */}
+                <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto custom-scrollbar">
+                    {filteredItems.map((item) => (
+                        <NavLink
+                            key={item.name}
+                            to={item.path}
+                            onClick={onClose}
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${isActive
+                                    ? 'bg-primary/8 text-primary font-semibold'
+                                    : 'text-muted hover:bg-app hover:text-main'
+                                }`
+                            }
+                        >
+                            {({ isActive }) => (
+                                <>
+                                    {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full" />}
+                                    <item.icon className="w-[18px] h-[18px] shrink-0" />
+                                    <span className="text-[13px] tracking-tight">{item.name}</span>
+                                </>
+                            )}
+                        </NavLink>
+                    ))}
+                </nav>
 
-            <div className="p-6 border-t border-white/5 bg-slate-900/20">
-                <button
-                    onClick={logout}
-                    className="flex items-center gap-4 w-full px-5 py-4 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-2xl transition-all duration-300 group border border-transparent hover:border-rose-500/20"
-                >
-                    <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                    <span className="font-black uppercase text-[11px] tracking-[0.2em]">Sign Out</span>
-                </button>
-            </div>
-        </aside>
+                {/* Footer */}
+                <div className="p-3 border-t border-border shrink-0">
+                    <button
+                        onClick={logout}
+                        className="flex items-center gap-3 w-full px-4 py-3 text-muted hover:text-danger hover:bg-danger/5 rounded-xl transition-all duration-200 group"
+                    >
+                        <LogOut className="w-[18px] h-[18px] group-hover:-translate-x-0.5 transition-transform" />
+                        <span className="text-[13px] font-medium">Sign Out</span>
+                    </button>
+                </div>
+            </aside>
         </>
     );
 };

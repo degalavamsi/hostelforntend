@@ -11,11 +11,11 @@ const Button = ({
   type = 'button'
 }) => {
   const variants = {
-    primary: 'bg-primary-600 hover:bg-primary-500 text-white shadow-lg shadow-primary-900/20 active:scale-95',
-    secondary: 'bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 active:scale-95',
-    outline: 'bg-transparent border border-primary-500/30 text-primary-400 hover:bg-primary-500/10 active:scale-95',
-    ghost: 'bg-transparent hover:bg-white/5 text-slate-400 hover:text-white',
-    danger: 'bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-900/20 active:scale-95',
+    primary: 'bg-primary hover:opacity-90 text-white shadow-lg shadow-primary/20 active:scale-95 rounded-full',
+    secondary: 'bg-primary/10 hover:bg-primary/20 text-primary active:scale-95 rounded-xl',
+    outline: 'bg-transparent border border-primary/30 text-primary hover:bg-primary/10 active:scale-95 rounded-xl',
+    ghost: 'bg-transparent hover:bg-muted/10 text-muted hover:text-main rounded-xl',
+    danger: 'bg-danger hover:opacity-90 text-white shadow-lg shadow-danger/20 active:scale-95 rounded-full',
   };
 
   return (
@@ -23,11 +23,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-      className={`
-        relative px-6 py-3 rounded-2xl font-bold transition-all duration-300 
-        flex items-center justify-center gap-2 group overflow-hidden
-        disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100
-        ${variants[variant]}
+      className={` relative px-6 py-3 font-medium transition-all duration-300 flex items-center justify-center gap-2 group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100 ${variants[variant]}
         ${className}
       `}
     >

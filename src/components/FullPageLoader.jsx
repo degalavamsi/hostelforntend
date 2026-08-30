@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Loader2 } from 'lucide-react';
 
 const FullPageLoader = () => {
     return (
-        <div className="fixed inset-0 min-h-screen bg-slate-950 flex flex-col items-center justify-center z-[9999]">
-            <div className="absolute inset-0 bg-primary-900/10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+        <div className="fixed inset-0 min-h-screen bg-app flex flex-col items-center justify-center z-[9999]">
+            {/* Ambient gradient blobs */}
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse-slow" />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/8 rounded-full blur-[100px] animate-float" />
 
-            <div className="relative z-10 flex flex-col items-center justify-center">
-                {/* Outer glowing pulse rings */}
-                <div className="absolute inset-0 bg-primary-500/20 blur-2xl rounded-full scale-150 animate-[ping_3s_ease-in-out_infinite]"></div>
-                <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full scale-110 animate-[pulse_2s_ease-in-out_infinite]"></div>
-
-                {/* Logo Image */}
-                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-primary-500/30 p-4 shadow-[0_0_40px_-10px_rgba(14,165,233,0.5)] bg-slate-900/80 backdrop-blur-md overflow-hidden flex items-center justify-center animate-[bounce_2s_ease-in-out_infinite]">
-                    <img
-                        src="/assets/codegnan-logo.png"
-                        alt="Loading"
-                        className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "https://codegnan.com/wp-content/uploads/2023/11/codegnan-logo-new.webp";
-                        }}
-                    />
+            <div className="relative z-10 flex flex-col items-center gap-8">
+                {/* Spinner */}
+                <div className="relative w-20 h-20">
+                    <div className="absolute inset-0 rounded-full border-[3px] border-border" />
+                    <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-primary animate-spin" />
+                    <div className="absolute inset-2 rounded-full border-[2px] border-transparent border-b-accent animate-[spin_1.5s_linear_infinite_reverse]" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
+                    </div>
                 </div>
 
-                {/* Rotating indicator ring */}
-                <div className="absolute w-40 h-40 md:w-48 md:h-48 border-t-4 border-r-4 border-primary-500 rounded-full animate-spin shadow-xl"></div>
-                <div className="absolute w-44 h-44 md:w-52 md:h-52 border-b-4 border-l-4 border-cyan-400 rounded-full animate-[spin_3s_linear_infinite_reverse] opacity-60"></div>
+                {/* Brand */}
+                <div className="text-center space-y-2">
+                    <h2 className="text-2xl font-bold text-main tracking-tight">
+                        Hostel<span className="text-primary">Pro</span>
+                    </h2>
+                    <p className="text-sm text-muted font-medium">Loading your workspace...</p>
+                </div>
             </div>
         </div>
     );
